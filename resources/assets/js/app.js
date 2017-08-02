@@ -18,6 +18,13 @@ window.Vue = require('vue');
 window.Please = require('pleasejs');
 window.qrcode = require('qrcode-generator');
 
-const app = new Vue({
-    el: '#app'
-});
+import Templates from './containers/Templates.vue';
+
+import EditorStore from './vuex/EditorStore';
+import TemplatesStore from './vuex/TemplatesStore';
+
+Vue.component('hello', require('./components/Hello.vue'));
+
+window.routes = {
+    templates: { el: '#app', store: TemplatesStore, render: h => h(Templates) }
+}

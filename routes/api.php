@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::namespace('Admin')->prefix('admin')->group(function () {
+Route::namespace('Api')->group(function () {
     Route::get('templates', 'TemplatesController@index');
     Route::post('templates', 'TemplatesController@store');
     Route::put('templates/{id}', 'TemplatesController@activate');
