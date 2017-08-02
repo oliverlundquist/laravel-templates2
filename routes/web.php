@@ -24,5 +24,6 @@ Route::get('/', function (Request $request) {
 Route::get('csrf', function () { return csrf_token(); });
 
 Route::namespace('Admin')->prefix('admin')->group(function () {
-    Route::get('templates', function () { return view('admin.templates'); });
+    Route::get('templates', function () { return view('admin.templates_index'); });
+    Route::get('templates/{id}', function ($id) { return view('admin.templates_edit', ['templateId' => $id]); });
 });

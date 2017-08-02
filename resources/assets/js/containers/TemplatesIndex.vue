@@ -3,7 +3,7 @@
         <div v-for="(chunk, index) in templateChunks" v-bind:key="index" class="template-row">
             <div v-for="template in chunk" v-bind:key="template.id" class="template-wrapper">
                 <div class="template-frame">Template {{ template.id }}</div>
-                <a :href="'/editor/' + template.id" class="btn btn-default">Edit</a>
+                <a :href="'/admin/templates/' + template.id" class="btn btn-default">Edit</a>
                 <button v-if="template.active === 1" class="btn disabled" disabled="disabled">Activate</button>
                 <button v-else @click="activateTemplate(template.id)" class="btn btn-default">Activate</button>
                 <a :href="'/?preview_template_id=' + template.id" class="btn btn-default">Preview</a>

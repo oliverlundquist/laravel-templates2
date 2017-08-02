@@ -18,13 +18,15 @@ window.Vue = require('vue');
 window.Please = require('pleasejs');
 window.qrcode = require('qrcode-generator');
 
-import Templates from './containers/Templates.vue';
+import TemplatesEdit from './containers/TemplatesEdit.vue';
+import TemplatesIndex from './containers/TemplatesIndex.vue';
 
-import EditorStore from './vuex/EditorStore';
-import TemplatesStore from './vuex/TemplatesStore';
+import TemplatesEditStore from './vuex/TemplatesEditStore';
+import TemplatesIndexStore from './vuex/TemplatesIndexStore';
 
 Vue.component('hello', require('./components/Hello.vue'));
 
 window.routes = {
-    templates: { el: '#app', store: TemplatesStore, render: h => h(Templates) }
+    templates_index: { el: '#app', store: TemplatesIndexStore, render: h => h(TemplatesIndex) },
+    templates_edit: { el: '#app', store: TemplatesEditStore, render: h => h(TemplatesEdit) }
 }
