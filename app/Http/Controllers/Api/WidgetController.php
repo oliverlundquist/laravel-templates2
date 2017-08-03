@@ -43,7 +43,8 @@ class WidgetController extends Controller
             'widget'   => $widget,
             'version'  => $version,
             'instance' => $instance,
-            'content'  => $template
+            'content'  => $template,
+            'settings' => $settings
         ];
     }
 }
