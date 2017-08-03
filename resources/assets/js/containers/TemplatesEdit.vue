@@ -52,14 +52,23 @@
                     <ul class="list-group">
                         <li class="list-group-item">
                             <h4>Base Color</h4>
-                            <div>set base color here</div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span :style="{ backgroundColor: '#' + colors.backgroundColor.code }" class="color-patch-with-label"></span>{{ colors.backgroundColor.name }} <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li v-for="(color, index) in colors.base" :key="index">
+                                        <a @click="setBaseColor(color)" style="cursor:pointer"><span :style="{ backgroundColor: '#' + color.code }" class="color-patch-with-label"></span>{{color.name}}</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="editor-wrapper">
-            <div class="editor">
+            <div :style="{ backgroundColor: '#' + colors.backgroundColor.code }" class="editor">
                 <draggable class="droparea" v-model="widgets" :options="{ group: 'widgets' }" @change="addWidget">
                     <div v-for="widget in widgets" :key="widget.instance" v-html="widget.content"></div>
                 </draggable>
@@ -78,11 +87,7 @@
             return {
                 colors: {
                     base: BaseColors,
-                    selected: {
-                        base: BaseColors[0],
-                        backgroundColorCodeIndex: 0,
-                        textColorCodeIndex: 0,
-                    }
+                    backgroundColor: BaseColors[144]
                 },
                 availableWidgets: ['jumbotron'],
                 sidebarTab: 'widgets'
@@ -94,6 +99,9 @@
             },
             setColor(index, color) {
                 this.$store.dispatch('loadWidget', { index: index, widget: { styles: true, settings: { color: _.clone(color) } } });
+            },
+            setBaseColor(color) {
+                this.colors.backgroundColor = _.clone(color);
             },
             addWidget(event) {
                 let settings = { backgroundColor: this.colors.base[0], color: this.colors.base[1] }
@@ -144,7 +152,8 @@
         flex-direction: column;
     }
     .editor {
-        width: 1024px;
+        width: 1064px; // 1024 + 20 + 20 padding
+        padding: 20px 20px 0 20px;
         margin: 0 auto;
         flex: 1;
         display: flex;

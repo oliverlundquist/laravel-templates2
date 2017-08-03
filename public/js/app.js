@@ -1715,6 +1715,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1725,11 +1734,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             colors: {
                 base: __WEBPACK_IMPORTED_MODULE_2__utils_base_colors__["a" /* default */],
-                selected: {
-                    base: __WEBPACK_IMPORTED_MODULE_2__utils_base_colors__["a" /* default */][0],
-                    backgroundColorCodeIndex: 0,
-                    textColorCodeIndex: 0
-                }
+                backgroundColor: __WEBPACK_IMPORTED_MODULE_2__utils_base_colors__["a" /* default */][144]
             },
             availableWidgets: ['jumbotron'],
             sidebarTab: 'widgets'
@@ -1742,6 +1747,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         setColor: function setColor(index, color) {
             this.$store.dispatch('loadWidget', { index: index, widget: { styles: true, settings: { color: _.clone(color) } } });
+        },
+        setBaseColor: function setBaseColor(color) {
+            this.colors.backgroundColor = _.clone(color);
         },
         addWidget: function addWidget(event) {
             var settings = { backgroundColor: this.colors.base[0], color: this.colors.base[1] };
@@ -4201,7 +4209,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-7d2b09a4] {\n  display: flex;\n  height: 100%;\n}\n.sidebar[data-v-7d2b09a4] {\n  width: 200px;\n  padding-top: 5px;\n  display: flex;\n  flex-direction: column;\n}\n.sidebar-inner[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  background-color: #eee;\n}\n.color-patch-with-label[data-v-7d2b09a4] {\n  padding: 0 8px;\n  margin: 0 5px 0 0;\n}\n.editor-wrapper[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  display: flex;\n  flex-direction: column;\n}\n.editor[data-v-7d2b09a4] {\n  width: 1024px;\n  margin: 0 auto;\n  flex: 1;\n  display: flex;\n}\n.droparea[data-v-7d2b09a4] {\n  flex: 1;\n}\n.widget-button[data-v-7d2b09a4] {\n  cursor: move;\n  width: 100%;\n  display: inline-block;\n  margin-bottom: 5px;\n  margin-top: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-7d2b09a4] {\n  display: flex;\n  height: 100%;\n}\n.sidebar[data-v-7d2b09a4] {\n  width: 200px;\n  padding-top: 5px;\n  display: flex;\n  flex-direction: column;\n}\n.sidebar-inner[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  background-color: #eee;\n}\n.color-patch-with-label[data-v-7d2b09a4] {\n  padding: 0 8px;\n  margin: 0 5px 0 0;\n}\n.editor-wrapper[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  display: flex;\n  flex-direction: column;\n}\n.editor[data-v-7d2b09a4] {\n  width: 1064px;\n  padding: 20px 20px 0 20px;\n  margin: 0 auto;\n  flex: 1;\n  display: flex;\n}\n.droparea[data-v-7d2b09a4] {\n  flex: 1;\n}\n.widget-button[data-v-7d2b09a4] {\n  cursor: move;\n  width: 100%;\n  display: inline-block;\n  margin-bottom: 5px;\n  margin-top: 5px;\n}\n", ""]);
 
 // exports
 
@@ -35811,10 +35819,54 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "type": "button"
       }
     }, [_vm._v(_vm._s(_vm.startCase(widget)))])
-  }))], 1)])])]) : _vm._e(), _vm._v(" "), (_vm.sidebarTab === 'settings') ? _c('div', [_vm._m(1)]) : _vm._e()])]), _vm._v(" "), _c('div', {
+  }))], 1)])])]) : _vm._e(), _vm._v(" "), (_vm.sidebarTab === 'settings') ? _c('div', [_c('ul', {
+    staticClass: "list-group"
+  }, [_c('li', {
+    staticClass: "list-group-item"
+  }, [_c('h4', [_vm._v("Base Color")]), _vm._v(" "), _c('div', {
+    staticClass: "btn-group"
+  }, [_c('button', {
+    staticClass: "btn btn-default dropdown-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "dropdown",
+      "aria-haspopup": "true",
+      "aria-expanded": "false"
+    }
+  }, [_c('span', {
+    staticClass: "color-patch-with-label",
+    style: ({
+      backgroundColor: '#' + _vm.colors.backgroundColor.code
+    })
+  }), _vm._v(_vm._s(_vm.colors.backgroundColor.name) + " "), _c('span', {
+    staticClass: "caret"
+  })]), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, _vm._l((_vm.colors.base), function(color, index) {
+    return _c('li', {
+      key: index
+    }, [_c('a', {
+      staticStyle: {
+        "cursor": "pointer"
+      },
+      on: {
+        "click": function($event) {
+          _vm.setBaseColor(color)
+        }
+      }
+    }, [_c('span', {
+      staticClass: "color-patch-with-label",
+      style: ({
+        backgroundColor: '#' + color.code
+      })
+    }), _vm._v(_vm._s(color.name))])])
+  }))])])])]) : _vm._e()])]), _vm._v(" "), _c('div', {
     staticClass: "editor-wrapper"
   }, [_c('div', {
-    staticClass: "editor"
+    staticClass: "editor",
+    style: ({
+      backgroundColor: '#' + _vm.colors.backgroundColor.code
+    })
   }, [_c('draggable', {
     staticClass: "droparea",
     attrs: {
@@ -35844,12 +35896,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('li', {
     staticClass: "list-group-item"
   }, [_c('h4', [_vm._v("Add Widget")]), _vm._v(" "), _c('div', [_vm._v("Drag and drop any widget below to the content area to the right to add it to your template.")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "list-group"
-  }, [_c('li', {
-    staticClass: "list-group-item"
-  }, [_c('h4', [_vm._v("Base Color")]), _vm._v(" "), _c('div', [_vm._v("set base color here")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
