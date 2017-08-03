@@ -14,6 +14,6 @@
             <div id="app"></div>
         </div>
         <script src="{{ mix('/js/app.js') }}"></script>
-        <script>new Vue(routes.templates_index)</script>
+        <script>new Vue(Object.assign(routes.templates_index, { store: new Vuex.Store(routes.templates_index.store) }))</script>
     </body>
 </html>

@@ -15,6 +15,6 @@
         </div>
         <script>window.template_id = {{ $templateId }}</script>
         <script src="{{ mix('/js/app.js') }}"></script>
-        <script>new Vue(routes.templates_edit)</script>
+         <script>new Vue(Object.assign(routes.templates_edit, { store: new Vuex.Store(routes.templates_edit.store) }))</script>
     </body>
 </html>

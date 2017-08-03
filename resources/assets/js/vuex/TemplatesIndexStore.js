@@ -1,8 +1,3 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex)
-
 const state = {
     templates: []
 }
@@ -35,9 +30,9 @@ const mutations = {
     }
 }
 
-export default new Vuex.Store({
+export default {
     state,
     getters,
     actions,
     mutations
-})
+}
