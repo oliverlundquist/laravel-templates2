@@ -69,7 +69,7 @@
         </div>
         <div class="editor-wrapper">
             <div :style="{ backgroundColor: '#' + colors.backgroundColor.code }" class="editor">
-                <draggable class="droparea" v-model="widgets" :options="{ group: 'widgets' }" @change="addWidget">
+                <draggable class="droparea" v-model="widgets" :options="{ group: 'widgets', handle: '.area' }" @change="addWidget">
                     <div v-for="widget in widgets" :key="widget.instance" v-html="widget.content"></div>
                 </draggable>
             </div>
@@ -107,7 +107,7 @@
                 let settings = { backgroundColor: this.colors.base[0], color: this.colors.base[1] }
                 let widgetName = event.added.element
                 let index = event.added.newIndex
-                this.$store.dispatch('loadWidget', { index: index, widget: { widget: widgetName, version: '1', styles: true, settings: settings } });
+                this.$store.dispatch('addWidget', { index: index, widget: { widget: widgetName, version: '1', styles: true, settings: settings } });
             },
             startCase(title) {
                 return _.startCase(title)
@@ -152,11 +152,11 @@
         flex-direction: column;
     }
     .editor {
-        width: 1064px; // 1024 + 20 + 20 padding
-        padding: 20px 20px 0 20px;
-        margin: 0 auto;
+        width: 1044px;
+        padding: 10px;
         flex: 1;
         display: flex;
+        margin: 0 auto;
     }
     .droparea {
         flex: 1;

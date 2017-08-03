@@ -1755,7 +1755,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var settings = { backgroundColor: this.colors.base[0], color: this.colors.base[1] };
             var widgetName = event.added.element;
             var index = event.added.newIndex;
-            this.$store.dispatch('loadWidget', { index: index, widget: { widget: widgetName, version: '1', styles: true, settings: settings } });
+            this.$store.dispatch('addWidget', { index: index, widget: { widget: widgetName, version: '1', styles: true, settings: settings } });
         },
         startCase: function startCase(title) {
             return _.startCase(title);
@@ -4209,7 +4209,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-7d2b09a4] {\n  display: flex;\n  height: 100%;\n}\n.sidebar[data-v-7d2b09a4] {\n  width: 200px;\n  padding-top: 5px;\n  display: flex;\n  flex-direction: column;\n}\n.sidebar-inner[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  background-color: #eee;\n}\n.color-patch-with-label[data-v-7d2b09a4] {\n  padding: 0 8px;\n  margin: 0 5px 0 0;\n}\n.editor-wrapper[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  display: flex;\n  flex-direction: column;\n}\n.editor[data-v-7d2b09a4] {\n  width: 1064px;\n  padding: 20px 20px 0 20px;\n  margin: 0 auto;\n  flex: 1;\n  display: flex;\n}\n.droparea[data-v-7d2b09a4] {\n  flex: 1;\n}\n.widget-button[data-v-7d2b09a4] {\n  cursor: move;\n  width: 100%;\n  display: inline-block;\n  margin-bottom: 5px;\n  margin-top: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-7d2b09a4] {\n  display: flex;\n  height: 100%;\n}\n.sidebar[data-v-7d2b09a4] {\n  width: 200px;\n  padding-top: 5px;\n  display: flex;\n  flex-direction: column;\n}\n.sidebar-inner[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  background-color: #eee;\n}\n.color-patch-with-label[data-v-7d2b09a4] {\n  padding: 0 8px;\n  margin: 0 5px 0 0;\n}\n.editor-wrapper[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  display: flex;\n  flex-direction: column;\n}\n.editor[data-v-7d2b09a4] {\n  width: 1044px;\n  padding: 10px;\n  flex: 1;\n  display: flex;\n  margin: 0 auto;\n}\n.droparea[data-v-7d2b09a4] {\n  flex: 1;\n}\n.widget-button[data-v-7d2b09a4] {\n  cursor: move;\n  width: 100%;\n  display: inline-block;\n  margin-bottom: 5px;\n  margin-top: 5px;\n}\n", ""]);
 
 // exports
 
@@ -35871,7 +35871,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "droparea",
     attrs: {
       "options": {
-        group: 'widgets'
+        group: 'widgets',
+        handle: '.area'
       }
     },
     on: {
@@ -47961,6 +47962,16 @@ var actions = {
         }).catch(function (error) {
             console.log(error);
         });
+    },
+    addWidget: function addWidget(_ref4, payload) {
+        var commit = _ref4.commit,
+            dispatch = _ref4.dispatch;
+
+        axios.post('/api/widget', _.merge(state.widgets[payload.index], payload.widget)).then(function (response) {
+            commit('addWidget', { widget: response.data, index: payload.index });
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 };
 
@@ -47972,6 +47983,9 @@ var mutations = {
         state.widgets.splice(payload.index, 0, payload.widget);
     },
     loadWidget: function loadWidget(state, payload) {
+        state.widgets.splice(payload.index, 1, payload.widget);
+    },
+    addWidget: function addWidget(state, payload) {
         state.widgets.splice(payload.index, 0, payload.widget);
     }
 };

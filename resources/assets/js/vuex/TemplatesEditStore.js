@@ -27,6 +27,11 @@ const actions = {
         axios.post('/api/widget', _.merge(state.widgets[payload.index], payload.widget))
                 .then((response) => { commit('loadWidget', { widget: response.data, index: payload.index }); })
                 .catch((error) => { console.log(error); });
+    },
+    addWidget: ({ commit, dispatch }, payload) => {
+        axios.post('/api/widget', _.merge(state.widgets[payload.index], payload.widget))
+                .then((response) => { commit('addWidget', { widget: response.data, index: payload.index }); })
+                .catch((error) => { console.log(error); });
     }
 }
 
@@ -38,6 +43,9 @@ const mutations = {
         state.widgets.splice(payload.index, 0, payload.widget);
     },
     loadWidget (state, payload) {
+        state.widgets.splice(payload.index, 1, payload.widget);
+    },
+    addWidget (state, payload) {
         state.widgets.splice(payload.index, 0, payload.widget);
     }
 }
