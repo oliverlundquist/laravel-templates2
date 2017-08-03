@@ -47971,7 +47971,7 @@ var actions = {
         var commit = _ref4.commit,
             dispatch = _ref4.dispatch;
 
-        axios.post('/api/widget', _.merge(state.widgets[payload.index], payload.widget)).then(function (response) {
+        axios.post('/api/widget', payload.widget).then(function (response) {
             commit('addWidget', { widget: response.data, index: payload.index });
         }).catch(function (error) {
             console.log(error);

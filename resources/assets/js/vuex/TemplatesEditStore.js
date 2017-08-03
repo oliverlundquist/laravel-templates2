@@ -29,7 +29,7 @@ const actions = {
                 .catch((error) => { console.log(error); });
     },
     addWidget: ({ commit, dispatch }, payload) => {
-        axios.post('/api/widget', _.merge(state.widgets[payload.index], payload.widget))
+        axios.post('/api/widget', payload.widget)
                 .then((response) => { commit('addWidget', { widget: response.data, index: payload.index }); })
                 .catch((error) => { console.log(error); });
     }
