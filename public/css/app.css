@@ -1,5 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
 
+html,
+body,
+.content {
+  height: 100%;
+}
+
 .content {
   width: 1350px;
   margin: 0 auto;

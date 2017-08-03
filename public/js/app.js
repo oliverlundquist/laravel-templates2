@@ -4201,7 +4201,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-7d2b09a4] {\n  display: flex;\n}\n.sidebar[data-v-7d2b09a4] {\n  width: 200px;\n  padding-top: 5px;\n  display: flex;\n  flex-direction: column;\n}\n.sidebar-inner[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  background-color: #eee;\n}\n.color-patch-with-label[data-v-7d2b09a4] {\n  padding: 0 8px;\n  margin: 0 5px 0 0;\n}\n.editor-wrapper[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  display: flex;\n  flex-direction: column;\n}\n.editor[data-v-7d2b09a4] {\n  width: 1024px;\n  margin: 0 auto;\n  flex: 1;\n  display: flex;\n}\n.droparea[data-v-7d2b09a4] {\n  flex: 1;\n}\n.widget-button[data-v-7d2b09a4] {\n  cursor: move;\n  width: 100%;\n  display: inline-block;\n  margin-bottom: 5px;\n  margin-top: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-7d2b09a4] {\n  display: flex;\n  height: 100%;\n}\n.sidebar[data-v-7d2b09a4] {\n  width: 200px;\n  padding-top: 5px;\n  display: flex;\n  flex-direction: column;\n}\n.sidebar-inner[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  background-color: #eee;\n}\n.color-patch-with-label[data-v-7d2b09a4] {\n  padding: 0 8px;\n  margin: 0 5px 0 0;\n}\n.editor-wrapper[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  display: flex;\n  flex-direction: column;\n}\n.editor[data-v-7d2b09a4] {\n  width: 1024px;\n  margin: 0 auto;\n  flex: 1;\n  display: flex;\n}\n.droparea[data-v-7d2b09a4] {\n  flex: 1;\n}\n.widget-button[data-v-7d2b09a4] {\n  cursor: move;\n  width: 100%;\n  display: inline-block;\n  margin-bottom: 5px;\n  margin-top: 5px;\n}\n", ""]);
 
 // exports
 
@@ -35811,7 +35811,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "type": "button"
       }
     }, [_vm._v(_vm._s(_vm.startCase(widget)))])
-  }))], 1)])])]) : _vm._e()]), _vm._v(" "), (_vm.sidebarTab === 'settings') ? _c('div', [_vm._m(1)]) : _vm._e()]), _vm._v(" "), _c('div', {
+  }))], 1)])])]) : _vm._e(), _vm._v(" "), (_vm.sidebarTab === 'settings') ? _c('div', [_vm._m(1)]) : _vm._e()])]), _vm._v(" "), _c('div', {
     staticClass: "editor-wrapper"
   }, [_c('div', {
     staticClass: "editor"

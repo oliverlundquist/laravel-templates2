@@ -48,14 +48,14 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-            <div v-if="sidebarTab === 'settings'">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <h4>Base Color</h4>
-                        <div>set base color here</div>
-                    </li>
-                </ul>
+                <div v-if="sidebarTab === 'settings'">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <h4>Base Color</h4>
+                            <div>set base color here</div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="editor-wrapper">
@@ -120,6 +120,7 @@
 <style lang="scss" scoped>
     .wrapper {
         display: flex;
+        height: 100%;
     }
     .sidebar {
         width: 200px;
