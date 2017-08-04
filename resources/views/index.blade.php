@@ -10,10 +10,16 @@
     </head>
     <body>
         <div class="content">
-            {{ $contents }}
-            {{-- @foreach ($contents as $content) --}}
-                {{-- @include('widgets.' . $content->template) --}}
-            {{-- @endforeach --}}
+            @foreach ($contents as $content)
+                @include('widgets.' . $content->widget . '-' . $content->version, [
+                    'widget'   => $content->widget,
+                    'version'  => $content->version,
+                    'styles'   => $content->styles,
+                    'instance' => $content->instance,
+                    'content'  => $content->content,
+                    'settings' => $content->settings
+                ])
+            @endforeach
         </div>
         <script src="{{ mix('/js/app.js') }}"></script>
     </body>

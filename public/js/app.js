@@ -1724,6 +1724,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1737,7 +1766,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 backgroundColor: __WEBPACK_IMPORTED_MODULE_2__utils_base_colors__["a" /* default */][144]
             },
             availableWidgets: ['jumbotron'],
-            sidebarTab: 'widgets'
+            sidebarTab: 'widgets',
+            showModal: false,
+            previewFrame: { width: 1024, height: 768 }
         };
     },
 
@@ -1757,6 +1788,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var index = event.added.newIndex;
             this.$store.dispatch('addWidget', { index: index, widget: { widget: widgetName, version: '1', styles: true, settings: settings } });
         },
+        save: function save() {
+            this.$store.dispatch('saveTemplatePage');
+        },
+        getQRCode: function getQRCode() {
+            var typeNumber = 8;
+            var errorCorrectionLevel = 'L';
+            var qr = qrcode(typeNumber, errorCorrectionLevel);
+            qr.addData('http://10.0.0.160/?preview_template_id=' + this.template_id);
+            qr.make();
+            return qr.createImgTag();
+        },
         startCase: function startCase(title) {
             return _.startCase(title);
         }
@@ -1767,10 +1809,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return this.$store.state.widgets;
             },
             set: function set(value) {}
+        },
+        template_id: function template_id() {
+            return window.template_id;
         }
     },
     created: function created() {
-        this.$store.dispatch('loadTemplate', { id: template_id });
+        this.$store.dispatch('loadTemplate', { id: this.template_id });
     },
 
     components: {
@@ -4209,7 +4254,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-7d2b09a4] {\n  display: flex;\n  height: 100%;\n}\n.sidebar[data-v-7d2b09a4] {\n  width: 200px;\n  padding-top: 5px;\n  display: flex;\n  flex-direction: column;\n}\n.sidebar-inner[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  background-color: #eee;\n}\n.color-patch-with-label[data-v-7d2b09a4] {\n  padding: 0 8px;\n  margin: 0 5px 0 0;\n}\n.editor-wrapper[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  display: flex;\n  flex-direction: column;\n}\n.editor[data-v-7d2b09a4] {\n  width: 1044px;\n  padding: 10px;\n  flex: 1;\n  display: flex;\n  margin: 0 auto;\n}\n.droparea[data-v-7d2b09a4] {\n  flex: 1;\n}\n.widget-button[data-v-7d2b09a4] {\n  cursor: move;\n  width: 100%;\n  display: inline-block;\n  margin-bottom: 5px;\n  margin-top: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-7d2b09a4] {\n  display: flex;\n  height: 100%;\n}\n.sidebar[data-v-7d2b09a4] {\n  width: 200px;\n  padding-top: 5px;\n  display: flex;\n  flex-direction: column;\n}\n.sidebar-inner[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  background-color: #eee;\n}\n.color-patch-with-label[data-v-7d2b09a4] {\n  padding: 0 8px;\n  margin: 0 5px 0 0;\n}\n.editor-wrapper[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  display: flex;\n  flex-direction: column;\n}\n.editor[data-v-7d2b09a4] {\n  width: 1044px;\n  padding: 10px;\n  flex: 1;\n  display: flex;\n  margin: 0 auto;\n}\n.droparea[data-v-7d2b09a4] {\n  flex: 1;\n}\n.widget-button[data-v-7d2b09a4] {\n  cursor: move;\n  width: 100%;\n  display: inline-block;\n  margin-bottom: 5px;\n  margin-top: 5px;\n}\n.fullwidth-button[data-v-7d2b09a4] {\n  width: 100%;\n  margin-bottom: 5px;\n  margin-top: 5px;\n}\n.preview-modal[data-v-7d2b09a4] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  padding: 20px;\n  background-color: rgba(0, 0, 0, 0.3);\n  text-align: center;\n}\n.preview-modal-inner[data-v-7d2b09a4] {\n  display: inline-block;\n}\n.preview-modal-menu[data-v-7d2b09a4] {\n  width: 355px;\n  display: inline-block;\n  background-color: #fff;\n  padding: 5px 5px 5px 14px;\n  text-align: left;\n}\n.preview-modal-content[data-v-7d2b09a4] {\n  padding: 20px;\n  background-color: #fff;\n  text-align: center;\n}\niframe[data-v-7d2b09a4] {\n  border: none;\n  display: block;\n}\n", ""]);
 
 // exports
 
@@ -35818,7 +35863,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "type": "button"
       }
-    }, [_vm._v(_vm._s(_vm.startCase(widget)))])
+    }, [_c('span', {
+      staticClass: "glyphicon glyphicon-move",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    }), _vm._v(" " + _vm._s(_vm.startCase(widget)))])
   }))], 1)])])]) : _vm._e(), _vm._v(" "), (_vm.sidebarTab === 'settings') ? _c('div', [_c('ul', {
     staticClass: "list-group"
   }, [_c('li', {
@@ -35860,7 +35910,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         backgroundColor: '#' + color.code
       })
     }), _vm._v(_vm._s(color.name))])])
-  }))])])])]) : _vm._e()])]), _vm._v(" "), _c('div', {
+  }))])])])]) : _vm._e(), _vm._v(" "), _c('div', [_c('ul', {
+    staticClass: "list-group"
+  }, [_vm._m(1), _vm._v(" "), _c('li', {
+    staticClass: "list-group-item"
+  }, [_c('a', {
+    staticClass: "btn btn-default fullwidth-button",
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        _vm.showModal = true
+      }
+    }
+  }, [_vm._v("Preview")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-default fullwidth-button",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": function($event) {
+        _vm.save()
+      }
+    }
+  }, [_vm._v("Save")])])])])])]), _vm._v(" "), _c('div', {
     staticClass: "editor-wrapper"
   }, [_c('div', {
     staticClass: "editor",
@@ -35892,11 +35966,90 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "innerHTML": _vm._s(widget.content)
       }
     })
-  }))], 1)])])
+  }))], 1)]), _vm._v(" "), (_vm.showModal) ? _c('div', {
+    staticClass: "preview-modal",
+    on: {
+      "click": function($event) {
+        if ($event.target !== $event.currentTarget) { return null; }
+        _vm.showModal = false
+      }
+    }
+  }, [_c('div', {
+    staticClass: "preview-modal-inner"
+  }, [_c('div', {
+    staticClass: "preview-modal-menu"
+  }, [_c('div', {
+    staticClass: "btn",
+    on: {
+      "click": function($event) {
+        _vm.previewFrame = {
+          width: 1024,
+          height: 768
+        }
+      }
+    }
+  }, [_c('span', {
+    staticClass: "glyphicon glyphicon-phone"
+  }), _vm._v("Desktop")]), _vm._v(" "), _c('div', {
+    staticClass: "btn",
+    on: {
+      "click": function($event) {
+        _vm.previewFrame = {
+          width: 768,
+          height: 1024
+        }
+      }
+    }
+  }, [_c('span', {
+    staticClass: "glyphicon glyphicon-phone"
+  }), _vm._v("iPad")]), _vm._v(" "), _c('div', {
+    staticClass: "btn",
+    on: {
+      "click": function($event) {
+        _vm.previewFrame = {
+          width: 375,
+          height: 667
+        }
+      }
+    }
+  }, [_c('span', {
+    staticClass: "glyphicon glyphicon-phone"
+  }), _vm._v("iPhone")]), _vm._v(" "), _c('div', {
+    staticClass: "btn",
+    on: {
+      "click": function($event) {
+        _vm.previewFrame = {
+          width: 380,
+          height: 667
+        }
+      }
+    }
+  }, [_c('span', {
+    staticClass: "glyphicon glyphicon-qrcode"
+  }), _vm._v("QR")])]), _vm._v(" "), _c('div', {
+    staticClass: "preview-modal-content"
+  }, [(_vm.previewFrame.width === 380) ? _c('div', [_c('h3', [_vm._v("Scan this QR code")]), _vm._v(" "), _c('h4', [_vm._v("to preview the template on your smartphone or tablet")]), _vm._v(" "), _c('div', {
+    domProps: {
+      "innerHTML": _vm._s(_vm.getQRCode())
+    }
+  })]) : _c('iframe', {
+    staticClass: "iframe",
+    style: ({
+      width: _vm.previewFrame.width + 'px',
+      height: _vm.previewFrame.height + 'px'
+    }),
+    attrs: {
+      "src": '/?preview_template_id=' + _vm.template_id
+    }
+  })])])]) : _vm._e()])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', {
     staticClass: "list-group-item"
   }, [_c('h4', [_vm._v("Add Widget")]), _vm._v(" "), _c('div', [_vm._v("Drag and drop any widget below to the content area to the right to add it to your template.")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', {
+    staticClass: "list-group-item"
+  }, [_c('h4', [_vm._v("Preview & Save")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -47684,8 +47837,6 @@ __webpack_require__("./resources/assets/js/bootstrap.js");
 window.Vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 window.Vuex = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
 
-Vue.use(Vuex);
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -47946,8 +48097,21 @@ var actions = {
             console.log(error);
         });
     },
-    loadWidgets: function loadWidgets(_ref2) {
+    saveTemplatePage: function saveTemplatePage(_ref2) {
         var commit = _ref2.commit;
+
+        var template = _.clone(state.template);
+        var widgets = _.cloneDeep(state.widgets);
+        var data = _.assign(template, { contents: widgets });
+
+        return axios.put('/api/template-pages/' + data.id, data).then(function (response) {
+            commit('saveTemplatePage', response.data);
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },
+    loadWidgets: function loadWidgets(_ref3) {
+        var commit = _ref3.commit;
 
         state.template.contents.forEach(function (widget, index) {
             axios.post('/api/widget', widget).then(function (response) {
@@ -47957,9 +48121,9 @@ var actions = {
             });
         });
     },
-    loadWidget: function loadWidget(_ref3, payload) {
-        var commit = _ref3.commit,
-            dispatch = _ref3.dispatch;
+    loadWidget: function loadWidget(_ref4, payload) {
+        var commit = _ref4.commit,
+            dispatch = _ref4.dispatch;
 
         axios.post('/api/widget', _.merge(state.widgets[payload.index], payload.widget)).then(function (response) {
             commit('loadWidget', { widget: response.data, index: payload.index });
@@ -47967,9 +48131,9 @@ var actions = {
             console.log(error);
         });
     },
-    addWidget: function addWidget(_ref4, payload) {
-        var commit = _ref4.commit,
-            dispatch = _ref4.dispatch;
+    addWidget: function addWidget(_ref5, payload) {
+        var commit = _ref5.commit,
+            dispatch = _ref5.dispatch;
 
         axios.post('/api/widget', payload.widget).then(function (response) {
             commit('addWidget', { widget: response.data, index: payload.index });
@@ -47982,6 +48146,9 @@ var actions = {
 var mutations = {
     loadTemplate: function loadTemplate(state, payload) {
         state.template = payload.pages[0];
+    },
+    saveTemplatePage: function saveTemplatePage(state, payload) {
+        console.log('saved template!', payload);
     },
     loadWidgets: function loadWidgets(state, payload) {
         state.widgets.splice(payload.index, 0, payload.widget);
@@ -48007,6 +48174,14 @@ var mutations = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__("./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["default"]);
+
 var state = {
     templates: []
 };

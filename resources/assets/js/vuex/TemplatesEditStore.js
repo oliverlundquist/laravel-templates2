@@ -16,6 +16,15 @@ const actions = {
                 .then((response) => { commit('loadTemplate', response.data); dispatch('loadWidgets'); })
                 .catch((error) => { console.log(error); });
     },
+    saveTemplatePage: ({ commit }) => {
+        let template = _.clone(state.template)
+        let widgets  = _.cloneDeep(state.widgets)
+        let data     = _.assign(template, { contents: widgets })
+
+        return axios.put('/api/template-pages/' + data.id, data)
+                .then((response) => { commit('saveTemplatePage', response.data); })
+                .catch((error) => { console.log(error); });
+    },
     loadWidgets: ({ commit }) => {
         state.template.contents.forEach((widget, index) => {
             axios.post('/api/widget', widget)
@@ -38,6 +47,9 @@ const actions = {
 const mutations = {
     loadTemplate (state, payload) {
         state.template = payload.pages[0];
+    },
+    saveTemplatePage (state, payload) {
+        console.log('saved template!', payload);
     },
     loadWidgets (state, payload) {
         state.widgets.splice(payload.index, 0, payload.widget);

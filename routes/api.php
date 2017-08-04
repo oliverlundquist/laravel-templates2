@@ -23,5 +23,7 @@ Route::namespace('Api')->group(function () {
     Route::post('templates', 'TemplatesController@store');
     Route::put('templates/{id}', 'TemplatesController@activate');
 
+    Route::put('template-pages/{id}', 'TemplatePagesController@update');
+
     Route::post('widget', 'WidgetController@generate');
 });

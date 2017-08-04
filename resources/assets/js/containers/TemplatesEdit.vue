@@ -42,7 +42,7 @@
                         <li class="list-group-item">
                             <div>
                                 <draggable v-model="availableWidgets" :options="{ group: { name: 'widgets', pull: 'clone', put: false } }">
-                                    <button v-for="(widget, index) in availableWidgets" :key="index" class="btn btn-default widget-button" type="button">{{ startCase(widget) }}</button>
+                                    <button v-for="(widget, index) in availableWidgets" :key="index" class="btn btn-default widget-button" type="button"><span class="glyphicon glyphicon-move" aria-hidden="true"></span> {{ startCase(widget) }}</button>
                                 </draggable>
                             </div>
                         </li>
@@ -65,6 +65,17 @@
                         </li>
                     </ul>
                 </div>
+                <div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <h4>Preview & Save</h4>
+                        </li>
+                        <li class="list-group-item">
+                            <a @click="showModal = true" href="#" class="btn btn-default fullwidth-button">Preview</a>
+                            <button @click="save()" type="button" class="btn btn-default fullwidth-button">Save</button>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="editor-wrapper">
@@ -72,6 +83,24 @@
                 <draggable class="droparea" v-model="widgets" :options="{ group: 'widgets', handle: '.area' }" @change="addWidget">
                     <div v-for="widget in widgets" :key="widget.instance" v-html="widget.content"></div>
                 </draggable>
+            </div>
+        </div>
+        <div v-if="showModal" @click.self="showModal = false" class="preview-modal">
+            <div class="preview-modal-inner">
+                <div class="preview-modal-menu">
+                    <div class="btn" @click="previewFrame = { width: 1024, height: 768 }"><span class="glyphicon glyphicon-phone"></span>Desktop</div>
+                    <div class="btn" @click="previewFrame = { width: 768, height: 1024 }"><span class="glyphicon glyphicon-phone"></span>iPad</div>
+                    <div class="btn" @click="previewFrame = { width: 375, height: 667 }"><span class="glyphicon glyphicon-phone"></span>iPhone</div>
+                    <div class="btn" @click="previewFrame = { width: 380, height: 667 }"><span class="glyphicon glyphicon-qrcode"></span>QR</div>
+                </div>
+                <div class="preview-modal-content">
+                    <div v-if="previewFrame.width === 380">
+                        <h3>Scan this QR code</h3>
+                        <h4>to preview the template on your smartphone or tablet</h4>
+                        <div v-html="getQRCode()"></div>
+                    </div>
+                    <iframe v-else class="iframe" :style="{ width: previewFrame.width + 'px', height: previewFrame.height + 'px' }" :src="'/?preview_template_id=' + template_id"></iframe>
+                </div>
             </div>
         </div>
     </div>
@@ -90,7 +119,9 @@
                     backgroundColor: BaseColors[144]
                 },
                 availableWidgets: ['jumbotron'],
-                sidebarTab: 'widgets'
+                sidebarTab: 'widgets',
+                showModal: false,
+                previewFrame: { width: 1024, height: 768 }
             }
         },
         methods: {
@@ -109,15 +140,27 @@
                 let index = event.added.newIndex
                 this.$store.dispatch('addWidget', { index: index, widget: { widget: widgetName, version: '1', styles: true, settings: settings } });
             },
+            save() {
+                this.$store.dispatch('saveTemplatePage')
+            },
+            getQRCode() {
+                var typeNumber = 8;
+                var errorCorrectionLevel = 'L';
+                var qr = qrcode(typeNumber, errorCorrectionLevel);
+                qr.addData('http://10.0.0.160/?preview_template_id=' + this.template_id);
+                qr.make();
+                return qr.createImgTag();
+            },
             startCase(title) {
                 return _.startCase(title)
             }
         },
         computed: {
-            widgets: { get() { return this.$store.state.widgets }, set(value) {} }
+            widgets: { get() { return this.$store.state.widgets }, set(value) {} },
+            template_id() { return window.template_id }
         },
         created() {
-            this.$store.dispatch('loadTemplate', { id: template_id });
+            this.$store.dispatch('loadTemplate', { id: this.template_id });
         },
         components: {
             draggable
@@ -167,5 +210,39 @@
         display: inline-block;
         margin-bottom: 5px;
         margin-top: 5px;
+    }
+    .fullwidth-button {
+        width: 100%;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+    .preview-modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        background-color: rgba(0,0,0,0.3);
+        text-align: center;
+    }
+    .preview-modal-inner {
+        display:inline-block;
+    }
+    .preview-modal-menu {
+        width:355px;
+        display:inline-block;
+        background-color:#fff;
+        padding:5px 5px 5px 14px;
+        text-align:left;
+    }
+    .preview-modal-content {
+        padding: 20px;
+        background-color: #fff;
+        text-align: center;
+    }
+    iframe {
+        border: none;
+        display: block;
     }
 </style>

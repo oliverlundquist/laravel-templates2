@@ -36,12 +36,13 @@ class WidgetController extends Controller
         $widget    = $this->request->input('widget');
         $version   = $this->request->input('version');
         $styles    = (bool) $this->request->input('styles');
-        $settings  = (object) $this->request->input('settings', $default = []);
+        $settings  = json_decode(json_encode($this->request->input('settings', $default = [])));
         $template  = (string) view('widgets.' . $widget . '-' . $version, compact('instance', 'widget', 'version', 'styles', 'settings'));
 
         return [
             'widget'   => $widget,
             'version'  => $version,
+            'styles'   => true,
             'instance' => $instance,
             'content'  => $template,
             'settings' => $settings
