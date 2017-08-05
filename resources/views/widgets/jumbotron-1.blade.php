@@ -1,5 +1,5 @@
 <div id="{{ $widget }}-{{ $instance }}" class="jumbotron">
-    <h1 contenteditable="true" spellcheck="false">I'm a jumbotron!</h1>
+    <h1 contenteditable="true" spellcheck="false" data-keyup="saveWidgetTitle" data-instance="{{ $instance }}">I'm a jumbotron!</h1>
     <p contenteditable="true" spellcheck="false">... and my background-color is: {{ $settings->backgroundColor->code }}</p>
 </div>
 @if ($styles === true)

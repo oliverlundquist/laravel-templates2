@@ -79,7 +79,7 @@
             </div>
         </div>
         <div class="editor-wrapper">
-            <div :style="{ backgroundColor: '#' + colors.backgroundColor.code }" class="editor">
+            <div @click="widgetClickEvent" @keyup="widgetKeyupEvent" :style="{ backgroundColor: '#' + colors.backgroundColor.code }" class="editor">
                 <draggable class="droparea" v-model="widgets" :options="{ group: 'widgets', handle: '.area' }" @change="addWidget">
                     <div v-for="widget in widgets" :key="widget.instance" v-html="widget.content"></div>
                 </draggable>
@@ -118,7 +118,7 @@
                     base: BaseColors,
                     backgroundColor: BaseColors[144]
                 },
-                availableWidgets: ['jumbotron'],
+                availableWidgets: ['jumbotron', 'header'],
                 sidebarTab: 'widgets',
                 showModal: false,
                 previewFrame: { width: 1024, height: 768 }
@@ -142,6 +142,21 @@
             },
             save() {
                 this.$store.dispatch('saveTemplatePage')
+            },
+            widgetClickEvent(event) {
+                if (typeof event.target.dataset.click === 'undefined' || typeof event.target.dataset.instance === 'undefined') {
+                    return; // undefined
+                }
+                this[event.target.dataset.click](event.target, event.target.dataset.instance);
+            },
+            widgetKeyupEvent(event) {
+                if (typeof event.target.dataset.keyup === 'undefined' || typeof event.target.dataset.instance === 'undefined') {
+                    return; // undefined
+                }
+                this[event.target.dataset.keyup](event.target, event.target.dataset.instance);
+            },
+            saveWidgetTitle(element, instance) {
+                console.log(element.innerHTML);
             },
             getQRCode() {
                 var typeNumber = 8;

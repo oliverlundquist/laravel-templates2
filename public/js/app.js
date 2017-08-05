@@ -1765,7 +1765,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 base: __WEBPACK_IMPORTED_MODULE_2__utils_base_colors__["a" /* default */],
                 backgroundColor: __WEBPACK_IMPORTED_MODULE_2__utils_base_colors__["a" /* default */][144]
             },
-            availableWidgets: ['jumbotron'],
+            availableWidgets: ['jumbotron', 'header'],
             sidebarTab: 'widgets',
             showModal: false,
             previewFrame: { width: 1024, height: 768 }
@@ -1790,6 +1790,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         save: function save() {
             this.$store.dispatch('saveTemplatePage');
+        },
+        widgetClickEvent: function widgetClickEvent(event) {
+            if (typeof event.target.dataset.click === 'undefined' || typeof event.target.dataset.instance === 'undefined') {
+                return; // undefined
+            }
+            this[event.target.dataset.click](event.target, event.target.dataset.instance);
+        },
+        widgetKeyupEvent: function widgetKeyupEvent(event) {
+            if (typeof event.target.dataset.keyup === 'undefined' || typeof event.target.dataset.instance === 'undefined') {
+                return; // undefined
+            }
+            this[event.target.dataset.keyup](event.target, event.target.dataset.instance);
+        },
+        saveWidgetTitle: function saveWidgetTitle(element, instance) {
+            console.log(element.innerHTML);
         },
         getQRCode: function getQRCode() {
             var typeNumber = 8;
@@ -35940,7 +35955,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "editor",
     style: ({
       backgroundColor: '#' + _vm.colors.backgroundColor.code
-    })
+    }),
+    on: {
+      "click": _vm.widgetClickEvent,
+      "keyup": _vm.widgetKeyupEvent
+    }
   }, [_c('draggable', {
     staticClass: "droparea",
     attrs: {
