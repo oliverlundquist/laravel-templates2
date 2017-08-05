@@ -1804,7 +1804,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this[event.target.dataset.keyup](event.target, event.target.dataset.instance);
         },
         saveWidgetTitle: function saveWidgetTitle(element, instance) {
-            console.log(element.innerHTML);
+            console.log(element.innerHTML, _.findIndex(this.$store.state.widgets, ['instance', instance]), this.$store.state.widgets[_.findIndex(this.$store.state.widgets, ['instance', instance])]);
         },
         getQRCode: function getQRCode() {
             var typeNumber = 8;
