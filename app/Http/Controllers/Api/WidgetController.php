@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Widgets\Widget;
 use Illuminate\Http\Request;
+use stdClass;
 
 class WidgetController extends Controller
 {
@@ -32,20 +34,19 @@ class WidgetController extends Controller
      */
     public function generate()
     {
-        $instance  = str_random(8);
-        $widget    = $this->request->input('widget');
-        $version   = $this->request->input('version');
-        $styles    = (bool) $this->request->input('styles');
-        $settings  = json_decode(json_encode($this->request->input('settings', $default = [])));
-        $template  = (string) view('widgets.' . $widget . '-' . $version, compact('instance', 'widget', 'version', 'styles', 'settings'));
+        $this->validate($this->request, [
+            'widget'          => 'required|array|filled',
+            'widget.name'     => 'required|string',
+            'widget.version'  => 'required|string',
+            'widget.instance' => 'string|max:8',
+            'widget.styles'   => 'string',
+            'widget.scripts'  => 'string',
+            'widget.content'  => 'string',
+            'widget.settings' => 'required|array'
+        ]);
 
-        return [
-            'widget'   => $widget,
-            'version'  => $version,
-            'styles'   => true,
-            'instance' => $instance,
-            'content'  => $template,
-            'settings' => $settings
-        ];
+        $data = $this->request->input('widget', $default = []);
+
+        return Widget::getWidget($data)->fill($data);
     }
 }
