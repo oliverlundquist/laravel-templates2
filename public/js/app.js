@@ -1754,6 +1754,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -1820,6 +1824,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         startCase: function startCase(title) {
             return _.startCase(title);
+        },
+        has: function has(object, key) {
+            return _.has(object, key);
         }
     },
     computed: {
@@ -35775,7 +35782,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('li', {
       key: widget.instance,
       staticClass: "list-group-item"
-    }, [_c('h4', [_vm._v(_vm._s(_vm.startCase(widget.widget)))]), _vm._v(" "), _c('div', [_vm._v("Background Color")]), _vm._v(" "), _c('div', {
+    }, [_c('h4', [_vm._v(_vm._s(_vm.startCase(widget.name)))]), _vm._v(" "), (_vm.has(widget.settings, 'backgroundColor')) ? _c('div', [_c('div', [_vm._v("Background Color")]), _vm._v(" "), _c('div', {
       staticClass: "btn-group"
     }, [_c('button', {
       staticClass: "btn btn-default dropdown-toggle",
@@ -35812,7 +35819,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           backgroundColor: '#' + color.code
         })
       }), _vm._v(_vm._s(color.name))])])
-    }))]), _vm._v(" "), _c('div', {
+    }))])]) : _vm._e(), _vm._v(" "), (_vm.has(widget.settings, 'color')) ? _c('div', [_c('div', {
       staticStyle: {
         "margin-top": "5px"
       }
@@ -35853,7 +35860,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           backgroundColor: '#' + color.code
         })
       }), _vm._v(_vm._s(color.name))])])
-    }))])])
+    }))])]) : _vm._e()])
   })), _vm._v(" "), _c('ul', {
     staticClass: "list-group"
   }, [_vm._m(0), _vm._v(" "), _c('li', {

@@ -9,28 +9,32 @@
                 <div v-if="sidebarTab === 'widgets'">
                     <ul class="list-group">
                         <li v-for="(widget, widgetIndex) in widgets" :key="widget.instance" class="list-group-item">
-                            <h4>{{ startCase(widget.widget) }}</h4>
-                            <div>Background Color</div>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span :style="{ backgroundColor: '#' + widget.settings.backgroundColor.code }" class="color-patch-with-label"></span>{{ widget.settings.backgroundColor.name }} <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li v-for="(color, index) in colors.base" :key="index">
-                                        <a @click="setBackgroundColor(widgetIndex, color)" style="cursor:pointer"><span :style="{ backgroundColor: '#' + color.code }" class="color-patch-with-label"></span>{{color.name}}</a>
-                                    </li>
-                                </ul>
+                            <h4>{{ startCase(widget.name) }}</h4>
+                            <div v-if="has(widget.settings, 'backgroundColor')">
+                                <div>Background Color</div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span :style="{ backgroundColor: '#' + widget.settings.backgroundColor.code }" class="color-patch-with-label"></span>{{ widget.settings.backgroundColor.name }} <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li v-for="(color, index) in colors.base" :key="index">
+                                            <a @click="setBackgroundColor(widgetIndex, color)" style="cursor:pointer"><span :style="{ backgroundColor: '#' + color.code }" class="color-patch-with-label"></span>{{color.name}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div style="margin-top:5px">Text Color</div>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span :style="{ backgroundColor: '#' + widget.settings.color.code }" class="color-patch-with-label"></span>{{ widget.settings.color.name }} <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li v-for="(color, index) in colors.base" :key="index">
-                                        <a @click="setColor(widgetIndex, color)" style="cursor:pointer"><span :style="{ backgroundColor: '#' + color.code }" class="color-patch-with-label"></span>{{color.name}}</a>
-                                    </li>
-                                </ul>
+                            <div v-if="has(widget.settings, 'color')">
+                                <div style="margin-top:5px">Text Color</div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span :style="{ backgroundColor: '#' + widget.settings.color.code }" class="color-patch-with-label"></span>{{ widget.settings.color.name }} <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li v-for="(color, index) in colors.base" :key="index">
+                                            <a @click="setColor(widgetIndex, color)" style="cursor:pointer"><span :style="{ backgroundColor: '#' + color.code }" class="color-patch-with-label"></span>{{color.name}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -173,6 +177,9 @@
             },
             startCase(title) {
                 return _.startCase(title)
+            },
+            has(object, key) {
+                return _.has(object, key);
             }
         },
         computed: {

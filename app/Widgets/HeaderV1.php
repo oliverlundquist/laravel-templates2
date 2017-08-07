@@ -9,8 +9,5 @@ class HeaderV1 extends Widget
      *
      * @var array
      */
-    protected $defaultSettings = [
-        'color'           => ['name' => 'aliceblue', 'code' => 'F0F8FF'],
-        'backgroundColor' => ['name' => 'antiquewhite', 'code' => 'FAEBD7']
-    ];
+    protected $defaultSettings = [];
 }
