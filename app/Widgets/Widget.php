@@ -71,10 +71,10 @@ abstract class Widget
         $templatePath = 'widgets.' . $data['name'] . '-' . $data['version'];
         $templateData = ['widget' => json_decode(json_encode($this->getData()))];
 
-        return json_encode(array_replace_recursive($data, [
+        return json_encode(['widget' => array_replace_recursive($data, [
             'styles'  => (string) view($templatePath . '.styles', $templateData),
             'content' => (string) view($templatePath . '.template', $templateData),
             'scripts' => (string) view($templatePath . '.scripts',  $templateData),
-        ]));
+        ])]);
     }
 }

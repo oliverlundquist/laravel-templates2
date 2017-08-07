@@ -18,7 +18,7 @@ const actions = {
     },
     saveTemplatePage: ({ commit }) => {
         let template = _.clone(state.template)
-        let widgets  = _.cloneDeep(state.widgets)
+        let widgets  = _.map(_.cloneDeep(state.widgets), widget => { return { widget: widget } })
         let data     = _.assign(template, { contents: widgets })
 
         return axios.put('/api/template-pages/' + data.id, data)
@@ -33,9 +33,12 @@ const actions = {
         });
     },
     loadWidget: ({ commit }, payload) => {
-        axios.post('/api/widget', _.merge(state.widgets[payload.index], payload.widget))
+        axios.post('/api/widget', { widget: _.merge(state.widgets[payload.index], payload.widget) })
                 .then((response) => { commit('loadWidget', { widget: response.data, index: payload.index }); })
                 .catch((error) => { console.log(error); });
+    },
+    updateWidget: ({ commit }, payload) => {
+        commit('updateWidget', { widget: _.merge(state.widgets[payload.index], payload.widget), index: payload.index })
     },
     addWidget: ({ commit, dispatch }, payload) => {
         axios.post('/api/widget', payload.widget)
@@ -52,13 +55,16 @@ const mutations = {
         console.log('saved template!', payload);
     },
     loadWidgets (state, payload) {
-        state.widgets.splice(payload.index, 0, payload.widget);
+        state.widgets.splice(payload.index, 0, payload.widget.widget);
     },
     loadWidget (state, payload) {
+        state.widgets.splice(payload.index, 1, payload.widget.widget);
+    },
+    updateWidget (state, payload) {
         state.widgets.splice(payload.index, 1, payload.widget);
     },
     addWidget (state, payload) {
-        state.widgets.splice(payload.index, 0, payload.widget);
+        state.widgets.splice(payload.index, 0, payload.widget.widget);
     }
 }
 

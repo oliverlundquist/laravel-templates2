@@ -161,11 +161,9 @@
                 this[event.target.dataset.keyup](event.target, event.target.dataset.instance);
             },
             saveWidgetTitle(element, instance) {
-                console.log(
-                    element.innerHTML,
-                    _.findIndex(this.$store.state.widgets, ['instance', instance]),
-                    this.$store.state.widgets[_.findIndex(this.$store.state.widgets, ['instance', instance])]
-                );
+                let index = _.findIndex(this.$store.state.widgets, ['instance', instance])
+                let headline = element.innerHTML
+                this.$store.dispatch('updateWidget', { index: index, widget: { settings: { headline: headline } } })
             },
             getQRCode() {
                 var typeNumber = 8;

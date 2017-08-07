@@ -1812,7 +1812,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this[event.target.dataset.keyup](event.target, event.target.dataset.instance);
         },
         saveWidgetTitle: function saveWidgetTitle(element, instance) {
-            console.log(element.innerHTML, _.findIndex(this.$store.state.widgets, ['instance', instance]), this.$store.state.widgets[_.findIndex(this.$store.state.widgets, ['instance', instance])]);
+            var index = _.findIndex(this.$store.state.widgets, ['instance', instance]);
+            var headline = element.innerHTML;
+            this.$store.dispatch('updateWidget', { index: index, widget: { settings: { headline: headline } } });
         },
         getQRCode: function getQRCode() {
             var typeNumber = 8;
@@ -48131,7 +48133,9 @@ var actions = {
         var commit = _ref2.commit;
 
         var template = _.clone(state.template);
-        var widgets = _.cloneDeep(state.widgets);
+        var widgets = _.map(_.cloneDeep(state.widgets), function (widget) {
+            return { widget: widget };
+        });
         var data = _.assign(template, { contents: widgets });
 
         return axios.put('/api/template-pages/' + data.id, data).then(function (response) {
@@ -48154,15 +48158,20 @@ var actions = {
     loadWidget: function loadWidget(_ref4, payload) {
         var commit = _ref4.commit;
 
-        axios.post('/api/widget', _.merge(state.widgets[payload.index], payload.widget)).then(function (response) {
+        axios.post('/api/widget', { widget: _.merge(state.widgets[payload.index], payload.widget) }).then(function (response) {
             commit('loadWidget', { widget: response.data, index: payload.index });
         }).catch(function (error) {
             console.log(error);
         });
     },
-    addWidget: function addWidget(_ref5, payload) {
-        var commit = _ref5.commit,
-            dispatch = _ref5.dispatch;
+    updateWidget: function updateWidget(_ref5, payload) {
+        var commit = _ref5.commit;
+
+        commit('updateWidget', { widget: _.merge(state.widgets[payload.index], payload.widget), index: payload.index });
+    },
+    addWidget: function addWidget(_ref6, payload) {
+        var commit = _ref6.commit,
+            dispatch = _ref6.dispatch;
 
         axios.post('/api/widget', payload.widget).then(function (response) {
             commit('addWidget', { widget: response.data, index: payload.index });
@@ -48180,13 +48189,16 @@ var mutations = {
         console.log('saved template!', payload);
     },
     loadWidgets: function loadWidgets(state, payload) {
-        state.widgets.splice(payload.index, 0, payload.widget);
+        state.widgets.splice(payload.index, 0, payload.widget.widget);
     },
     loadWidget: function loadWidget(state, payload) {
+        state.widgets.splice(payload.index, 1, payload.widget.widget);
+    },
+    updateWidget: function updateWidget(state, payload) {
         state.widgets.splice(payload.index, 1, payload.widget);
     },
     addWidget: function addWidget(state, payload) {
-        state.widgets.splice(payload.index, 0, payload.widget);
+        state.widgets.splice(payload.index, 0, payload.widget.widget);
     }
 };
 
