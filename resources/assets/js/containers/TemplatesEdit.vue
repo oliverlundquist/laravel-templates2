@@ -42,7 +42,7 @@
                         <li class="list-group-item">
                             <div>
                                 <draggable v-model="availableWidgets" :options="{ group: { name: 'widgets', pull: 'clone', put: false } }">
-                                    <button v-for="(widget, index) in availableWidgets" :key="index" class="btn btn-default widget-button" type="button"><span class="glyphicon glyphicon-move" aria-hidden="true"></span> {{ startCase(widget) }}</button>
+                                    <button v-for="(widget, index) in availableWidgets" :key="index" class="btn btn-default widget-button" type="button"><span class="glyphicon glyphicon-move" aria-hidden="true"></span> {{ startCase(widget.name) }}</button>
                                 </draggable>
                             </div>
                         </li>
@@ -81,7 +81,7 @@
         <div class="editor-wrapper">
             <div @click="widgetClickEvent" @keyup="widgetKeyupEvent" :style="{ backgroundColor: '#' + colors.backgroundColor.code }" class="editor">
                 <draggable class="droparea" v-model="widgets" :options="{ group: 'widgets', handle: '.area' }" @change="addWidget">
-                    <div v-for="widget in widgets" :key="widget.instance" v-html="widget.content"></div>
+                    <div v-for="widget in widgets" :key="widget.instance" v-html="widget.content + widget.styles"></div>
                 </draggable>
             </div>
         </div>
@@ -110,6 +110,7 @@
     import draggable from 'vuedraggable'
     import { mapGetters, mapActions } from 'vuex'
     import BaseColors from '../utils/base-colors'
+    import * as Widgets from '../widgets'
 
     export default {
         data() {
@@ -118,7 +119,7 @@
                     base: BaseColors,
                     backgroundColor: BaseColors[144]
                 },
-                availableWidgets: ['jumbotron', 'header'],
+                availableWidgets: _.map(Widgets, value => value),
                 sidebarTab: 'widgets',
                 showModal: false,
                 previewFrame: { width: 1024, height: 768 }
@@ -126,10 +127,10 @@
         },
         methods: {
             setBackgroundColor(index, color) {
-                this.$store.dispatch('loadWidget', { index: index, widget: { styles: true, settings: { backgroundColor: _.clone(color) } } });
+                this.$store.dispatch('loadWidget', { index: index, widget: { settings: { backgroundColor: _.clone(color) } } });
             },
             setColor(index, color) {
-                this.$store.dispatch('loadWidget', { index: index, widget: { styles: true, settings: { color: _.clone(color) } } });
+                this.$store.dispatch('loadWidget', { index: index, widget: { settings: { color: _.clone(color) } } });
             },
             setBaseColor(color) {
                 this.colors.backgroundColor = _.clone(color);

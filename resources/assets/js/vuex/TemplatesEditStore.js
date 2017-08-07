@@ -32,7 +32,7 @@ const actions = {
                 .catch((error) => { console.log(error); });
         });
     },
-    loadWidget: ({ commit, dispatch }, payload) => {
+    loadWidget: ({ commit }, payload) => {
         axios.post('/api/widget', _.merge(state.widgets[payload.index], payload.widget))
                 .then((response) => { commit('loadWidget', { widget: response.data, index: payload.index }); })
                 .catch((error) => { console.log(error); });

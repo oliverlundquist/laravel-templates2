@@ -42,7 +42,7 @@ class WidgetController extends Controller
             'widget.styles'   => 'string',
             'widget.scripts'  => 'string',
             'widget.content'  => 'string',
-            'widget.settings' => 'required|array'
+            'widget.settings' => 'array'
         ]);
 
         $data = $this->request->input('widget', $default = []);

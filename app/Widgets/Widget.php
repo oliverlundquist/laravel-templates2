@@ -56,7 +56,7 @@ abstract class Widget
             'styles'   => $this->styles ?? '',
             'scripts'  => $this->scripts ?? '',
             'content'  => $this->content ?? '',
-            'settings' => array_replace($this->defaultSettings, $this->settings),
+            'settings' => array_replace($this->defaultSettings, $this->settings ?? []),
         ];
     }
 

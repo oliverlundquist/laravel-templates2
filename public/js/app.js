@@ -1645,6 +1645,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuedraggable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuedraggable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_base_colors__ = __webpack_require__("./resources/assets/js/utils/base-colors.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__widgets__ = __webpack_require__("./resources/assets/js/widgets/index.js");
 //
 //
 //
@@ -1753,6 +1754,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -1765,7 +1767,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 base: __WEBPACK_IMPORTED_MODULE_2__utils_base_colors__["a" /* default */],
                 backgroundColor: __WEBPACK_IMPORTED_MODULE_2__utils_base_colors__["a" /* default */][144]
             },
-            availableWidgets: ['jumbotron', 'header'],
+            availableWidgets: _.map(__WEBPACK_IMPORTED_MODULE_3__widgets__, function (value) {
+                return value;
+            }),
             sidebarTab: 'widgets',
             showModal: false,
             previewFrame: { width: 1024, height: 768 }
@@ -1774,10 +1778,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         setBackgroundColor: function setBackgroundColor(index, color) {
-            this.$store.dispatch('loadWidget', { index: index, widget: { styles: true, settings: { backgroundColor: _.clone(color) } } });
+            this.$store.dispatch('loadWidget', { index: index, widget: { settings: { backgroundColor: _.clone(color) } } });
         },
         setColor: function setColor(index, color) {
-            this.$store.dispatch('loadWidget', { index: index, widget: { styles: true, settings: { color: _.clone(color) } } });
+            this.$store.dispatch('loadWidget', { index: index, widget: { settings: { color: _.clone(color) } } });
         },
         setBaseColor: function setBaseColor(color) {
             this.colors.backgroundColor = _.clone(color);
@@ -35883,7 +35887,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "aria-hidden": "true"
       }
-    }), _vm._v(" " + _vm._s(_vm.startCase(widget)))])
+    }), _vm._v(" " + _vm._s(_vm.startCase(widget.name)))])
   }))], 1)])])]) : _vm._e(), _vm._v(" "), (_vm.sidebarTab === 'settings') ? _c('div', [_c('ul', {
     staticClass: "list-group"
   }, [_c('li', {
@@ -35982,7 +35986,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('div', {
       key: widget.instance,
       domProps: {
-        "innerHTML": _vm._s(widget.content)
+        "innerHTML": _vm._s(widget.content + widget.styles)
       }
     })
   }))], 1)]), _vm._v(" "), (_vm.showModal) ? _c('div', {
@@ -48141,8 +48145,7 @@ var actions = {
         });
     },
     loadWidget: function loadWidget(_ref4, payload) {
-        var commit = _ref4.commit,
-            dispatch = _ref4.dispatch;
+        var commit = _ref4.commit;
 
         axios.post('/api/widget', _.merge(state.widgets[payload.index], payload.widget)).then(function (response) {
             commit('loadWidget', { widget: response.data, index: payload.index });
@@ -48247,6 +48250,42 @@ var mutations = {
     getters: getters,
     actions: actions,
     mutations: mutations
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/widgets/header-1.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    name: "header",
+    version: "1"
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/widgets/index.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__header_1__ = __webpack_require__("./resources/assets/js/widgets/header-1.js");
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "header1", function() { return __WEBPACK_IMPORTED_MODULE_0__header_1__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__jumbotron_1__ = __webpack_require__("./resources/assets/js/widgets/jumbotron-1.js");
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "jumbotron1", function() { return __WEBPACK_IMPORTED_MODULE_1__jumbotron_1__["a"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/widgets/jumbotron-1.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    name: "jumbotron",
+    version: "1"
 });
 
 /***/ }),
