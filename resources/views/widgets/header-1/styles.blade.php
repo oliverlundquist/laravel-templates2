@@ -13,6 +13,7 @@
         border-color: #{{ $widget->settings->borderColor->code }};
         border-style: solid;
         border-width: 5px;
+        cursor: pointer;
     }
     #{{ $widget->name }}-{{ $widget->instance }} .text-wrapper {
         flex: 1;

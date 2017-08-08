@@ -4331,7 +4331,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-7d2b09a4] {\n  display: flex;\n  height: 100%;\n}\n.sidebar[data-v-7d2b09a4] {\n  width: 200px;\n  padding-top: 5px;\n  display: flex;\n  flex-direction: column;\n}\n.sidebar-inner[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  background-color: #eee;\n}\n.color-patch-with-label[data-v-7d2b09a4] {\n  padding: 0 8px;\n  margin: 0 5px 0 0;\n}\n.editor-wrapper[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  display: flex;\n  flex-direction: column;\n}\n.editor[data-v-7d2b09a4] {\n  width: 1044px;\n  padding: 10px;\n  flex: 1;\n  display: flex;\n  margin: 0 auto;\n}\n.droparea[data-v-7d2b09a4] {\n  flex: 1;\n}\n.widget-button[data-v-7d2b09a4] {\n  cursor: move;\n  width: 100%;\n  display: inline-block;\n  margin-bottom: 5px;\n  margin-top: 5px;\n}\n.fullwidth-button[data-v-7d2b09a4] {\n  width: 100%;\n  margin-bottom: 5px;\n  margin-top: 5px;\n}\n.preview-modal[data-v-7d2b09a4] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  padding: 20px;\n  background-color: rgba(0, 0, 0, 0.3);\n  text-align: center;\n}\n.preview-modal-inner[data-v-7d2b09a4] {\n  display: inline-block;\n}\n.preview-modal-menu[data-v-7d2b09a4] {\n  width: 355px;\n  display: inline-block;\n  background-color: #fff;\n  padding: 5px 5px 5px 14px;\n  text-align: left;\n}\n.preview-modal-content[data-v-7d2b09a4] {\n  padding: 20px;\n  background-color: #fff;\n  text-align: center;\n}\n.image-gallery-image[data-v-7d2b09a4] {\n  padding: 10px;\n  cursor: pointer;\n}\niframe[data-v-7d2b09a4] {\n  border: none;\n  display: block;\n}\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-7d2b09a4] {\n  display: flex;\n  height: 100%;\n}\n.sidebar[data-v-7d2b09a4] {\n  width: 200px;\n  padding-top: 5px;\n  display: flex;\n  flex-direction: column;\n}\n.sidebar-inner[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  background-color: #eee;\n}\n.color-patch-with-label[data-v-7d2b09a4] {\n  padding: 0 8px;\n  margin: 0 5px 0 0;\n}\n.editor-wrapper[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  display: flex;\n  flex-direction: column;\n}\n.editor[data-v-7d2b09a4] {\n  width: 1044px;\n  padding: 10px;\n  flex: 1;\n  display: flex;\n  margin: 0 auto;\n}\n.droparea[data-v-7d2b09a4] {\n  flex: 1;\n}\n.widget-button[data-v-7d2b09a4] {\n  cursor: move;\n  width: 100%;\n  display: inline-block;\n  margin-bottom: 5px;\n  margin-top: 5px;\n}\n.fullwidth-button[data-v-7d2b09a4] {\n  width: 100%;\n  margin-bottom: 5px;\n  margin-top: 5px;\n}\n.preview-modal[data-v-7d2b09a4] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  padding: 20px;\n  background-color: rgba(0, 0, 0, 0.3);\n  text-align: center;\n}\n.preview-modal-inner[data-v-7d2b09a4] {\n  display: inline-block;\n}\n.preview-modal-menu[data-v-7d2b09a4] {\n  width: 360px;\n  display: inline-block;\n  background-color: #fff;\n  padding: 5px 5px 5px 14px;\n  text-align: left;\n  border-top-left-radius: 4px;\n  border-top-right-radius: 4px;\n}\n.preview-modal-content[data-v-7d2b09a4] {\n  padding: 20px;\n  background-color: #fff;\n  text-align: center;\n  border-radius: 4px;\n}\n.image-gallery-image[data-v-7d2b09a4] {\n  padding: 10px;\n  cursor: pointer;\n}\niframe[data-v-7d2b09a4] {\n  border: none;\n  display: block;\n}\n", ""]);
 
 // exports
 
@@ -36108,7 +36108,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('span', {
     staticClass: "glyphicon glyphicon-phone"
-  }), _vm._v("Desktop")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" Desktop")]), _vm._v(" "), _c('div', {
     staticClass: "btn",
     on: {
       "click": function($event) {
@@ -36120,7 +36120,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('span', {
     staticClass: "glyphicon glyphicon-phone"
-  }), _vm._v("iPad")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" iPad")]), _vm._v(" "), _c('div', {
     staticClass: "btn",
     on: {
       "click": function($event) {
@@ -36132,7 +36132,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('span', {
     staticClass: "glyphicon glyphicon-phone"
-  }), _vm._v("iPhone")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" iPhone")]), _vm._v(" "), _c('div', {
     staticClass: "btn",
     on: {
       "click": function($event) {
@@ -36144,7 +36144,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('span', {
     staticClass: "glyphicon glyphicon-qrcode"
-  }), _vm._v("QR")])]), _vm._v(" "), _c('div', {
+  }), _vm._v(" QR")])]), _vm._v(" "), _c('div', {
     staticClass: "preview-modal-content"
   }, [(_vm.previewFrame.width === 380) ? _c('div', [_c('h3', [_vm._v("Scan this QR code")]), _vm._v(" "), _c('h4', [_vm._v("to preview the template on your smartphone or tablet")]), _vm._v(" "), _c('div', {
     domProps: {
@@ -36264,16 +36264,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('h4', [_vm._v("Preview & Save")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "preview-modal-menu"
+    staticClass: "preview-modal-menu",
+    staticStyle: {
+      "width": "255px"
+    }
   }, [_c('div', {
     staticClass: "btn"
   }, [_c('span', {
-    staticClass: "glyphicon glyphicon-phone"
-  }), _vm._v("Images")]), _vm._v(" "), _c('div', {
+    staticClass: "glyphicon glyphicon-picture"
+  }), _vm._v(" Images")]), _vm._v(" "), _c('div', {
     staticClass: "btn"
   }, [_c('span', {
-    staticClass: "glyphicon glyphicon-phone"
-  }), _vm._v("Upload Image")])])
+    staticClass: "glyphicon glyphicon-upload"
+  }), _vm._v(" Upload Image")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

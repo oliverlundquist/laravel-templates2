@@ -105,10 +105,10 @@
         <div v-if="showModal" @click.self="showModal = false" class="preview-modal">
             <div class="preview-modal-inner">
                 <div class="preview-modal-menu">
-                    <div class="btn" @click="previewFrame = { width: 1024, height: 768 }"><span class="glyphicon glyphicon-phone"></span>Desktop</div>
-                    <div class="btn" @click="previewFrame = { width: 768, height: 1024 }"><span class="glyphicon glyphicon-phone"></span>iPad</div>
-                    <div class="btn" @click="previewFrame = { width: 375, height: 667 }"><span class="glyphicon glyphicon-phone"></span>iPhone</div>
-                    <div class="btn" @click="previewFrame = { width: 380, height: 667 }"><span class="glyphicon glyphicon-qrcode"></span>QR</div>
+                    <div class="btn" @click="previewFrame = { width: 1024, height: 768 }"><span class="glyphicon glyphicon-phone"></span> Desktop</div>
+                    <div class="btn" @click="previewFrame = { width: 768, height: 1024 }"><span class="glyphicon glyphicon-phone"></span> iPad</div>
+                    <div class="btn" @click="previewFrame = { width: 375, height: 667 }"><span class="glyphicon glyphicon-phone"></span> iPhone</div>
+                    <div class="btn" @click="previewFrame = { width: 380, height: 667 }"><span class="glyphicon glyphicon-qrcode"></span> QR</div>
                 </div>
                 <div class="preview-modal-content">
                     <div v-if="previewFrame.width === 380">
@@ -122,9 +122,9 @@
         </div>
         <div v-if="showImageGallery" @click.self="showImageGallery = false" class="preview-modal">
             <div class="preview-modal-inner">
-                <div class="preview-modal-menu">
-                    <div class="btn"><span class="glyphicon glyphicon-phone"></span>Images</div>
-                    <div class="btn"><span class="glyphicon glyphicon-phone"></span>Upload Image</div>
+                <div class="preview-modal-menu" style="width:255px">
+                    <div class="btn"><span class="glyphicon glyphicon-picture"></span> Images</div>
+                    <div class="btn"><span class="glyphicon glyphicon-upload"></span> Upload Image</div>
                 </div>
                 <div class="preview-modal-content">
                     <img @click="selectImageInGallery('/images/chips1.jpg')" class="image-gallery-image" src="/images/chips1.jpg" />
@@ -302,16 +302,19 @@
         display:inline-block;
     }
     .preview-modal-menu {
-        width:355px;
+        width:360px;
         display:inline-block;
         background-color:#fff;
         padding:5px 5px 5px 14px;
         text-align:left;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
     }
     .preview-modal-content {
         padding: 20px;
         background-color: #fff;
         text-align: center;
+        border-radius: 4px;
     }
     .image-gallery-image {
         padding: 10px;
