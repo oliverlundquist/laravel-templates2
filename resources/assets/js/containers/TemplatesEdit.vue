@@ -178,10 +178,9 @@
                 this.colors.backgroundColor = _.clone(color);
             },
             addWidget(event) {
-                let settings = { backgroundColor: this.colors.base[0], color: this.colors.base[1] }
-                let widgetName = event.added.element
                 let index = event.added.newIndex
-                this.$store.dispatch('addWidget', { index: index, widget: { widget: widgetName, version: '1', styles: true, settings: settings } });
+                let widget = _.clone(event.added.element)
+                this.$store.dispatch('addWidget', { index: index, widget: widget });
             },
             save() {
                 this.$store.dispatch('saveTemplatePage')

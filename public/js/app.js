@@ -1831,10 +1831,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             this.colors.backgroundColor = _.clone(color);
         },
         addWidget: function addWidget(event) {
-            var settings = { backgroundColor: this.colors.base[0], color: this.colors.base[1] };
-            var widgetName = event.added.element;
             var index = event.added.newIndex;
-            this.$store.dispatch('addWidget', { index: index, widget: { widget: widgetName, version: '1', styles: true, settings: settings } });
+            var widget = _.clone(event.added.element);
+            this.$store.dispatch('addWidget', { index: index, widget: widget });
         },
         save: function save() {
             this.$store.dispatch('saveTemplatePage');
@@ -48368,7 +48367,7 @@ var actions = {
         var commit = _ref6.commit,
             dispatch = _ref6.dispatch;
 
-        axios.post('/api/widget', payload.widget).then(function (response) {
+        axios.post('/api/widget', { widget: payload.widget }).then(function (response) {
             commit('addWidget', { widget: response.data, index: payload.index });
         }).catch(function (error) {
             console.log(error);

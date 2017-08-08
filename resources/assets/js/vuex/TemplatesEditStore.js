@@ -41,7 +41,7 @@ const actions = {
         commit('updateWidget', { widget: _.merge(state.widgets[payload.index], payload.widget), index: payload.index })
     },
     addWidget: ({ commit, dispatch }, payload) => {
-        axios.post('/api/widget', payload.widget)
+        axios.post('/api/widget', { widget: payload.widget })
                 .then((response) => { commit('addWidget', { widget: response.data, index: payload.index }); })
                 .catch((error) => { console.log(error); });
     }

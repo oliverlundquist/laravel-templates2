@@ -52,7 +52,7 @@ abstract class Widget
         return [
             'name'     => $this->name,
             'version'  => $this->version,
-            'instance' => $this->instance ?? str_random(8),
+            'instance' => $this->instance = $this->instance ?? str_random(8),
             'styles'   => $this->styles ?? '',
             'scripts'  => $this->scripts ?? '',
             'content'  => $this->content ?? '',
