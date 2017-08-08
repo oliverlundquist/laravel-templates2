@@ -46,6 +46,17 @@ class TemplatesController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int      $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        return $this->templates->with('pages')->find($id);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @return Response

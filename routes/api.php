@@ -19,6 +19,11 @@ use Illuminate\Http\Request;
 
 Route::namespace('Api')->group(function () {
     Route::get('templates', 'TemplatesController@index');
+    Route::get('templates/{id}', 'TemplatesController@show');
     Route::post('templates', 'TemplatesController@store');
     Route::put('templates/{id}', 'TemplatesController@activate');
+
+    Route::put('template-pages/{id}', 'TemplatePagesController@update');
+
+    Route::post('widget', 'WidgetController@generate');
 });

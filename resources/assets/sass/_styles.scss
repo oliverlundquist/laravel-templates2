@@ -1,3 +1,9 @@
+html, body, .content {
+    height: 100%;
+}
+[contenteditable=true] {
+    outline-color: $brand-primary;
+}
 .content {
     width: 1350px;
     margin: 0 auto;

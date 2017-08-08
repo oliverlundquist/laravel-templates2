@@ -29,4 +29,26 @@ class TemplatePages extends Model
         'page' => 'index',
         'contents' => '{}'
     ];
+
+    /**
+     * Get contents attribute from model.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getContentsAttribute($value)
+    {
+        return is_string($value) ? json_decode($value) : $value;
+    }
+
+    /**
+     * Set the contents attribute.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setContentsAttribute($value)
+    {
+        $this->attributes['contents'] = is_array($value) ? json_encode($value) : $value;
+    }
 }
