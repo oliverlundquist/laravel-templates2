@@ -9,5 +9,10 @@ class HeaderV1 extends Widget
      *
      * @var array
      */
-    protected $defaultSettings = [];
+    protected $defaultSettings = [
+        'logo'        => '/images/default-logo.png',
+        'borderColor' => ['name' => 'aliceblue', 'code' => 'F0F8FF'],
+        'headline'    => 'Webshop',
+        'kicker'      => 'An attention grabbing kicker'
+    ];
 }

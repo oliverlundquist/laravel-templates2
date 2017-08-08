@@ -9,16 +9,10 @@
         <title>Toppage</title>
     </head>
     <body>
-        <div class="content">
+        <div class="container">
             @foreach ($contents as $content)
-                @include('widgets.' . $content->widget . '-' . $content->version, [
-                    'widget'   => $content->widget,
-                    'version'  => $content->version,
-                    'styles'   => $content->styles,
-                    'instance' => $content->instance,
-                    'content'  => $content->content,
-                    'settings' => $content->settings
-                ])
+                @include('widgets.' . $content->widget->name . '-' . $content->widget->version . '.template', ['widget' => $content->widget])
+                @include('widgets.' . $content->widget->name . '-' . $content->widget->version . '.styles',   ['widget' => $content->widget])
             @endforeach
         </div>
         <script src="{{ mix('/js/app.js') }}"></script>

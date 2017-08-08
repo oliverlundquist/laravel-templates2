@@ -36,6 +36,19 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div v-if="has(widget.settings, 'borderColor')">
+                                <div>Border Color</div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span :style="{ backgroundColor: '#' + widget.settings.borderColor.code }" class="color-patch-with-label"></span>{{ widget.settings.borderColor.name }} <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li v-for="(color, index) in colors.base" :key="index">
+                                            <a @click="setBorderColor(widgetIndex, color)" style="cursor:pointer"><span :style="{ backgroundColor: '#' + color.code }" class="color-patch-with-label"></span>{{color.name}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                     <ul class="list-group">
@@ -107,6 +120,26 @@
                 </div>
             </div>
         </div>
+        <div v-if="showImageGallery" @click.self="showImageGallery = false" class="preview-modal">
+            <div class="preview-modal-inner">
+                <div class="preview-modal-menu">
+                    <div class="btn"><span class="glyphicon glyphicon-phone"></span>Images</div>
+                    <div class="btn"><span class="glyphicon glyphicon-phone"></span>Upload Image</div>
+                </div>
+                <div class="preview-modal-content">
+                    <img @click="selectImageInGallery('/images/chips1.jpg')" class="image-gallery-image" src="/images/chips1.jpg" />
+                    <img @click="selectImageInGallery('/images/chips2.jpg')" class="image-gallery-image" src="/images/chips2.jpg" />
+                    <img @click="selectImageInGallery('/images/chips3.jpg')" class="image-gallery-image" src="/images/chips3.jpg" />
+                    <img @click="selectImageInGallery('/images/chips4.jpg')" class="image-gallery-image" src="/images/chips4.jpg" />
+                </div>
+                <div class="preview-modal-content">
+                    <img @click="selectImageInGallery('/images/chips5.jpg')" class="image-gallery-image" src="/images/chips5.jpg" />
+                    <img @click="selectImageInGallery('/images/chips6.jpg')" class="image-gallery-image" src="/images/chips6.jpg" />
+                    <img @click="selectImageInGallery('/images/chips7.jpg')" class="image-gallery-image" src="/images/chips7.jpg" />
+                    <img @click="selectImageInGallery('/images/chips8.jpg')" class="image-gallery-image" src="/images/chips8.jpg" />
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -126,6 +159,8 @@
                 availableWidgets: _.map(Widgets, value => value),
                 sidebarTab: 'widgets',
                 showModal: false,
+                showImageGallery: false,
+                imageGalleryInstance: '',
                 previewFrame: { width: 1024, height: 768 }
             }
         },
@@ -135,6 +170,9 @@
             },
             setColor(index, color) {
                 this.$store.dispatch('loadWidget', { index: index, widget: { settings: { color: _.clone(color) } } });
+            },
+            setBorderColor(index, color) {
+                this.$store.dispatch('loadWidget', { index: index, widget: { settings: { borderColor: _.clone(color) } } });
             },
             setBaseColor(color) {
                 this.colors.backgroundColor = _.clone(color);
@@ -152,18 +190,27 @@
                 if (typeof event.target.dataset.click === 'undefined' || typeof event.target.dataset.instance === 'undefined') {
                     return; // undefined
                 }
-                this[event.target.dataset.click](event.target, event.target.dataset.instance);
+                this[event.target.dataset.click](event.target, event.target.dataset.instance, event.target.dataset.setting);
             },
             widgetKeyupEvent(event) {
                 if (typeof event.target.dataset.keyup === 'undefined' || typeof event.target.dataset.instance === 'undefined') {
                     return; // undefined
                 }
-                this[event.target.dataset.keyup](event.target, event.target.dataset.instance);
+                this[event.target.dataset.keyup](event.target, event.target.dataset.instance, event.target.dataset.setting);
             },
-            saveWidgetTitle(element, instance) {
+            saveWidgetTitle(element, instance, setting) {
                 let index = _.findIndex(this.$store.state.widgets, ['instance', instance])
-                let headline = element.innerHTML
-                this.$store.dispatch('updateWidget', { index: index, widget: { settings: { headline: headline } } })
+                let text = element.innerHTML
+                this.$store.dispatch('updateWidget', { index: index, widget: { settings: { [setting]: text } } })
+            },
+            openImageGallery(element, instance) {
+                this.showImageGallery = true
+                this.imageGalleryInstance = instance
+            },
+            selectImageInGallery(imgSrc) {
+                let index = _.findIndex(this.$store.state.widgets, ['instance', this.imageGalleryInstance])
+                this.$store.dispatch('loadWidget', { index: index, widget: { settings: { logo: imgSrc } } })
+                this.showImageGallery = false
             },
             getQRCode() {
                 var typeNumber = 8;
@@ -265,6 +312,10 @@
         padding: 20px;
         background-color: #fff;
         text-align: center;
+    }
+    .image-gallery-image {
+        padding: 10px;
+        cursor: pointer;
     }
     iframe {
         border: none;
