@@ -2003,7 +2003,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             return _.has(object, key);
         },
         showImageGalleryTab: function showImageGalleryTab() {
-            this.imageGalleryTab = 'images';
+            var _this = this;
+
+            this.$store.dispatch('getGalleryImages').then(function () {
+                _this.imageGalleryTab = 'images';
+            });
         }
     },
     computed: Object.assign({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["mapGetters"])(['imageGalleryChunks']), {

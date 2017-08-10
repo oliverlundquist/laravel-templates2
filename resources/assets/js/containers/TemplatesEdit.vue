@@ -235,7 +235,9 @@
                 return _.has(object, key);
             },
             showImageGalleryTab() {
-                this.imageGalleryTab = 'images'
+                this.$store.dispatch('getGalleryImages').then(() => {
+                    this.imageGalleryTab = 'images'
+                })
             }
         },
         computed: Object.assign({}, mapGetters(['imageGalleryChunks']), {
