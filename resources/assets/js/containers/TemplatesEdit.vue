@@ -123,20 +123,27 @@
         <div v-if="showImageGallery" @click.self="showImageGallery = false" class="preview-modal">
             <div class="preview-modal-inner">
                 <div class="preview-modal-menu" style="width:255px">
-                    <div class="btn"><span class="glyphicon glyphicon-picture"></span> Images</div>
-                    <div class="btn"><span class="glyphicon glyphicon-upload"></span> Upload Image</div>
+                    <div class="btn" @click="imageGalleryTab = 'images'"><span class="glyphicon glyphicon-picture"></span> Images</div>
+                    <div class="btn" @click="imageGalleryTab = 'upload'"><span class="glyphicon glyphicon-upload"></span> Upload Image</div>
                 </div>
-                <div class="preview-modal-content">
-                    <img @click="selectImageInGallery('/images/chips1.jpg')" class="image-gallery-image" src="/images/chips1.jpg" />
-                    <img @click="selectImageInGallery('/images/chips2.jpg')" class="image-gallery-image" src="/images/chips2.jpg" />
-                    <img @click="selectImageInGallery('/images/chips3.jpg')" class="image-gallery-image" src="/images/chips3.jpg" />
-                    <img @click="selectImageInGallery('/images/chips4.jpg')" class="image-gallery-image" src="/images/chips4.jpg" />
-                </div>
-                <div class="preview-modal-content">
-                    <img @click="selectImageInGallery('/images/chips5.jpg')" class="image-gallery-image" src="/images/chips5.jpg" />
-                    <img @click="selectImageInGallery('/images/chips6.jpg')" class="image-gallery-image" src="/images/chips6.jpg" />
-                    <img @click="selectImageInGallery('/images/chips7.jpg')" class="image-gallery-image" src="/images/chips7.jpg" />
-                    <img @click="selectImageInGallery('/images/chips8.jpg')" class="image-gallery-image" src="/images/chips8.jpg" />
+                <div class="preview-modal-content" style="width:900px">
+                    <div v-if="imageGalleryTab === 'images'">
+                        <div>
+                            <img @click="selectImageInGallery('/images/chips1.jpg')" class="image-gallery-image" src="/images/chips1.jpg" />
+                            <img @click="selectImageInGallery('/images/chips2.jpg')" class="image-gallery-image" src="/images/chips2.jpg" />
+                            <img @click="selectImageInGallery('/images/chips3.jpg')" class="image-gallery-image" src="/images/chips3.jpg" />
+                            <img @click="selectImageInGallery('/images/chips4.jpg')" class="image-gallery-image" src="/images/chips4.jpg" />
+                        </div>
+                        <div>
+                            <img @click="selectImageInGallery('/images/chips5.jpg')" class="image-gallery-image" src="/images/chips5.jpg" />
+                            <img @click="selectImageInGallery('/images/chips6.jpg')" class="image-gallery-image" src="/images/chips6.jpg" />
+                            <img @click="selectImageInGallery('/images/chips7.jpg')" class="image-gallery-image" src="/images/chips7.jpg" />
+                            <img @click="selectImageInGallery('/images/chips8.jpg')" class="image-gallery-image" src="/images/chips8.jpg" />
+                        </div>
+                    </div>
+                    <div v-if="imageGalleryTab === 'upload'">
+                        <droppable v-on:showImageGalleryTab="showImageGalleryTab"></droppable>
+                    </div>
                 </div>
             </div>
         </div>
@@ -145,6 +152,7 @@
 
 <script>
     import draggable from 'vuedraggable'
+    import droppable from '../components/Droppable.vue'
     import { mapGetters, mapActions } from 'vuex'
     import BaseColors from '../utils/base-colors'
     import * as Widgets from '../widgets'
@@ -159,8 +167,9 @@
                 availableWidgets: _.map(Widgets, value => value),
                 sidebarTab: 'widgets',
                 showModal: false,
-                showImageGallery: false,
+                showImageGallery: true,
                 imageGalleryInstance: '',
+                imageGalleryTab: 'upload',
                 previewFrame: { width: 1024, height: 768 }
             }
         },
@@ -224,17 +233,23 @@
             },
             has(object, key) {
                 return _.has(object, key);
+            },
+            showImageGalleryTab() {
+                this.imageGalleryTab = 'images'
             }
         },
         computed: {
             widgets: { get() { return this.$store.state.widgets }, set(value) {} },
             template_id() { return window.template_id }
         },
+
         created() {
             this.$store.dispatch('loadTemplate', { id: this.template_id });
+            this.$store.dispatch('getGalleryImages');
         },
         components: {
-            draggable
+            draggable,
+            droppable
         }
     }
 </script>

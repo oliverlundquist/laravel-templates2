@@ -26,4 +26,7 @@ Route::namespace('Api')->group(function () {
     Route::put('template-pages/{id}', 'TemplatePagesController@update');
 
     Route::post('widget', 'WidgetController@generate');
+
+    Route::get('images', 'ImagesController@index');
+    Route::post('images', 'ImagesController@store');
 });

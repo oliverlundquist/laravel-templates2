@@ -25,8 +25,6 @@ import TemplatesIndex from './containers/TemplatesIndex.vue';
 import TemplatesEditStore from './vuex/TemplatesEditStore';
 import TemplatesIndexStore from './vuex/TemplatesIndexStore';
 
-Vue.component('hello', require('./components/Hello.vue'));
-
 window.routes = {
     templates_index: { el: '#app', store: TemplatesIndexStore, render: h => h(TemplatesIndex) },
     templates_edit: { el: '#app', store: TemplatesEditStore, render: h => h(TemplatesEdit) }

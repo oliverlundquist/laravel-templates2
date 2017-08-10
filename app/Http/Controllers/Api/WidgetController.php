@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Widgets\Widget;
-use Illuminate\Http\Request;
-use stdClass;
 
 class WidgetController extends Controller
 {
