@@ -128,17 +128,17 @@
                 </div>
                 <div class="preview-modal-content" style="width:900px">
                     <div v-if="imageGalleryTab === 'images'">
-                        <div>
-                            <img @click="selectImageInGallery('/images/chips1.jpg')" class="image-gallery-image" src="/images/chips1.jpg" />
-                            <img @click="selectImageInGallery('/images/chips2.jpg')" class="image-gallery-image" src="/images/chips2.jpg" />
-                            <img @click="selectImageInGallery('/images/chips3.jpg')" class="image-gallery-image" src="/images/chips3.jpg" />
-                            <img @click="selectImageInGallery('/images/chips4.jpg')" class="image-gallery-image" src="/images/chips4.jpg" />
+                        <div v-if="imageGalleryChunks.length === 0" class="image-drop-box">
+                            <div class="image-drop-box-default">
+                                <div class="image-drop-box-default_wrapper">
+                                    <div class="glyphicon glyphicon-picture image-drop-box-default__icon"></div>
+                                    <h4>Image Gallery</h4>
+                                    <p>Your image gallery is empty, upload some images by clicking on the Upload Image tab above.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <img @click="selectImageInGallery('/images/chips5.jpg')" class="image-gallery-image" src="/images/chips5.jpg" />
-                            <img @click="selectImageInGallery('/images/chips6.jpg')" class="image-gallery-image" src="/images/chips6.jpg" />
-                            <img @click="selectImageInGallery('/images/chips7.jpg')" class="image-gallery-image" src="/images/chips7.jpg" />
-                            <img @click="selectImageInGallery('/images/chips8.jpg')" class="image-gallery-image" src="/images/chips8.jpg" />
+                        <div v-for="(imageGalleryChunk, imageGalleryChunkIndex) in imageGalleryChunks" :key="imageGalleryChunkIndex">
+                            <img v-for="(image, imageIndex) in imageGalleryChunk" :key="imageGalleryChunkIndex + '' + imageIndex" @click="selectImageInGallery('/uploads/' + image)" class="image-gallery-image" :src="'/uploads/' + image" />
                         </div>
                     </div>
                     <div v-if="imageGalleryTab === 'upload'">
@@ -167,9 +167,9 @@
                 availableWidgets: _.map(Widgets, value => value),
                 sidebarTab: 'widgets',
                 showModal: false,
-                showImageGallery: true,
+                showImageGallery: false,
                 imageGalleryInstance: '',
-                imageGalleryTab: 'upload',
+                imageGalleryTab: 'images',
                 previewFrame: { width: 1024, height: 768 }
             }
         },
@@ -238,11 +238,10 @@
                 this.imageGalleryTab = 'images'
             }
         },
-        computed: {
+        computed: Object.assign({}, mapGetters(['imageGalleryChunks']), {
             widgets: { get() { return this.$store.state.widgets }, set(value) {} },
             template_id() { return window.template_id }
-        },
-
+        }),
         created() {
             this.$store.dispatch('loadTemplate', { id: this.template_id });
             this.$store.dispatch('getGalleryImages');
@@ -337,5 +336,24 @@
     iframe {
         border: none;
         display: block;
+    }
+    // move this into a image gallery component
+    .image-drop-box {
+        width: 100%;
+        min-height: 200px;
+        // margin-bottom: 20px;
+        display: flex;
+    }
+    .image-drop-box-default {
+        background-color: #EEE;
+        flex: 1;
+        display: flex;
+        align-items: center;
+    }
+    .image-drop-box-default_wrapper {
+        flex: 1;
+    }
+    .image-drop-box-default__icon {
+        font-size: 40px;
     }
 </style>

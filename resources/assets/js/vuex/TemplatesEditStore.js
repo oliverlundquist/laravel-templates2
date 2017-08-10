@@ -5,10 +5,15 @@ Vue.use(Vuex)
 
 const state = {
     template: {},
-    widgets: []
+    widgets: [],
+    galleryImages: []
 }
 
-const getters = {}
+const getters = {
+    imageGalleryChunks: state => {
+        return _.chunk(state.galleryImages, 4);
+    }
+}
 
 const actions = {
     loadTemplate: ({ commit, dispatch }, payload) => {
@@ -44,6 +49,11 @@ const actions = {
         axios.post('/api/widget', { widget: payload.widget })
                 .then((response) => { commit('addWidget', { widget: response.data, index: payload.index }); })
                 .catch((error) => { console.log(error); });
+    },
+    getGalleryImages: ({ commit }) => {
+        axios.get('/api/images')
+            .then((response) => { commit('getGalleryImages', response.data); })
+            .catch((error) => { console.log(error); });
     }
 }
 
@@ -65,7 +75,10 @@ const mutations = {
     },
     addWidget (state, payload) {
         state.widgets.splice(payload.index, 0, payload.widget.widget);
-    }
+    },
+    getGalleryImages (state, payload) {
+        state.galleryImages = payload;
+    },
 }
 
 export default {

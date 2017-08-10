@@ -1934,9 +1934,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }),
             sidebarTab: 'widgets',
             showModal: false,
-            showImageGallery: true,
+            showImageGallery: false,
             imageGalleryInstance: '',
-            imageGalleryTab: 'upload',
+            imageGalleryTab: 'images',
             previewFrame: { width: 1024, height: 768 }
         };
     },
@@ -2006,7 +2006,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             this.imageGalleryTab = 'images';
         }
     },
-    computed: {
+    computed: Object.assign({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["mapGetters"])(['imageGalleryChunks']), {
         widgets: {
             get: function get() {
                 return this.$store.state.widgets;
@@ -2016,8 +2016,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         template_id: function template_id() {
             return window.template_id;
         }
-    },
-
+    }),
     created: function created() {
         this.$store.dispatch('loadTemplate', { id: this.template_id });
         this.$store.dispatch('getGalleryImages');
@@ -4460,7 +4459,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-7d2b09a4] {\n  display: flex;\n  height: 100%;\n}\n.sidebar[data-v-7d2b09a4] {\n  width: 200px;\n  padding-top: 5px;\n  display: flex;\n  flex-direction: column;\n}\n.sidebar-inner[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  background-color: #eee;\n}\n.color-patch-with-label[data-v-7d2b09a4] {\n  padding: 0 8px;\n  margin: 0 5px 0 0;\n}\n.editor-wrapper[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  display: flex;\n  flex-direction: column;\n}\n.editor[data-v-7d2b09a4] {\n  width: 1044px;\n  padding: 10px;\n  flex: 1;\n  display: flex;\n  margin: 0 auto;\n}\n.droparea[data-v-7d2b09a4] {\n  flex: 1;\n}\n.widget-button[data-v-7d2b09a4] {\n  cursor: move;\n  width: 100%;\n  display: inline-block;\n  margin-bottom: 5px;\n  margin-top: 5px;\n}\n.fullwidth-button[data-v-7d2b09a4] {\n  width: 100%;\n  margin-bottom: 5px;\n  margin-top: 5px;\n}\n.preview-modal[data-v-7d2b09a4] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  padding: 20px;\n  background-color: rgba(0, 0, 0, 0.3);\n  text-align: center;\n}\n.preview-modal-inner[data-v-7d2b09a4] {\n  display: inline-block;\n}\n.preview-modal-menu[data-v-7d2b09a4] {\n  width: 360px;\n  display: inline-block;\n  background-color: #fff;\n  padding: 5px 5px 5px 14px;\n  text-align: left;\n  border-top-left-radius: 4px;\n  border-top-right-radius: 4px;\n}\n.preview-modal-content[data-v-7d2b09a4] {\n  padding: 20px;\n  background-color: #fff;\n  text-align: center;\n  border-radius: 4px;\n}\n.image-gallery-image[data-v-7d2b09a4] {\n  padding: 10px;\n  cursor: pointer;\n}\niframe[data-v-7d2b09a4] {\n  border: none;\n  display: block;\n}\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-7d2b09a4] {\n  display: flex;\n  height: 100%;\n}\n.sidebar[data-v-7d2b09a4] {\n  width: 200px;\n  padding-top: 5px;\n  display: flex;\n  flex-direction: column;\n}\n.sidebar-inner[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  background-color: #eee;\n}\n.color-patch-with-label[data-v-7d2b09a4] {\n  padding: 0 8px;\n  margin: 0 5px 0 0;\n}\n.editor-wrapper[data-v-7d2b09a4] {\n  flex: 1;\n  padding-top: 20px;\n  display: flex;\n  flex-direction: column;\n}\n.editor[data-v-7d2b09a4] {\n  width: 1044px;\n  padding: 10px;\n  flex: 1;\n  display: flex;\n  margin: 0 auto;\n}\n.droparea[data-v-7d2b09a4] {\n  flex: 1;\n}\n.widget-button[data-v-7d2b09a4] {\n  cursor: move;\n  width: 100%;\n  display: inline-block;\n  margin-bottom: 5px;\n  margin-top: 5px;\n}\n.fullwidth-button[data-v-7d2b09a4] {\n  width: 100%;\n  margin-bottom: 5px;\n  margin-top: 5px;\n}\n.preview-modal[data-v-7d2b09a4] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  padding: 20px;\n  background-color: rgba(0, 0, 0, 0.3);\n  text-align: center;\n}\n.preview-modal-inner[data-v-7d2b09a4] {\n  display: inline-block;\n}\n.preview-modal-menu[data-v-7d2b09a4] {\n  width: 360px;\n  display: inline-block;\n  background-color: #fff;\n  padding: 5px 5px 5px 14px;\n  text-align: left;\n  border-top-left-radius: 4px;\n  border-top-right-radius: 4px;\n}\n.preview-modal-content[data-v-7d2b09a4] {\n  padding: 20px;\n  background-color: #fff;\n  text-align: center;\n  border-radius: 4px;\n}\n.image-gallery-image[data-v-7d2b09a4] {\n  padding: 10px;\n  cursor: pointer;\n}\niframe[data-v-7d2b09a4] {\n  border: none;\n  display: block;\n}\n.image-drop-box[data-v-7d2b09a4] {\n  width: 100%;\n  min-height: 200px;\n  display: flex;\n}\n.image-drop-box-default[data-v-7d2b09a4] {\n  background-color: #EEE;\n  flex: 1;\n  display: flex;\n  align-items: center;\n}\n.image-drop-box-default_wrapper[data-v-7d2b09a4] {\n  flex: 1;\n}\n.image-drop-box-default__icon[data-v-7d2b09a4] {\n  font-size: 40px;\n}\n", ""]);
 
 // exports
 
@@ -36326,87 +36325,26 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "width": "900px"
     }
-  }, [(_vm.imageGalleryTab === 'images') ? _c('div', [_c('div', [_c('img', {
-    staticClass: "image-gallery-image",
-    attrs: {
-      "src": "/images/chips1.jpg"
-    },
-    on: {
-      "click": function($event) {
-        _vm.selectImageInGallery('/images/chips1.jpg')
-      }
-    }
-  }), _vm._v(" "), _c('img', {
-    staticClass: "image-gallery-image",
-    attrs: {
-      "src": "/images/chips2.jpg"
-    },
-    on: {
-      "click": function($event) {
-        _vm.selectImageInGallery('/images/chips2.jpg')
-      }
-    }
-  }), _vm._v(" "), _c('img', {
-    staticClass: "image-gallery-image",
-    attrs: {
-      "src": "/images/chips3.jpg"
-    },
-    on: {
-      "click": function($event) {
-        _vm.selectImageInGallery('/images/chips3.jpg')
-      }
-    }
-  }), _vm._v(" "), _c('img', {
-    staticClass: "image-gallery-image",
-    attrs: {
-      "src": "/images/chips4.jpg"
-    },
-    on: {
-      "click": function($event) {
-        _vm.selectImageInGallery('/images/chips4.jpg')
-      }
-    }
-  })]), _vm._v(" "), _c('div', [_c('img', {
-    staticClass: "image-gallery-image",
-    attrs: {
-      "src": "/images/chips5.jpg"
-    },
-    on: {
-      "click": function($event) {
-        _vm.selectImageInGallery('/images/chips5.jpg')
-      }
-    }
-  }), _vm._v(" "), _c('img', {
-    staticClass: "image-gallery-image",
-    attrs: {
-      "src": "/images/chips6.jpg"
-    },
-    on: {
-      "click": function($event) {
-        _vm.selectImageInGallery('/images/chips6.jpg')
-      }
-    }
-  }), _vm._v(" "), _c('img', {
-    staticClass: "image-gallery-image",
-    attrs: {
-      "src": "/images/chips7.jpg"
-    },
-    on: {
-      "click": function($event) {
-        _vm.selectImageInGallery('/images/chips7.jpg')
-      }
-    }
-  }), _vm._v(" "), _c('img', {
-    staticClass: "image-gallery-image",
-    attrs: {
-      "src": "/images/chips8.jpg"
-    },
-    on: {
-      "click": function($event) {
-        _vm.selectImageInGallery('/images/chips8.jpg')
-      }
-    }
-  })])]) : _vm._e(), _vm._v(" "), (_vm.imageGalleryTab === 'upload') ? _c('div', [_c('droppable', {
+  }, [(_vm.imageGalleryTab === 'images') ? _c('div', [(_vm.imageGalleryChunks.length === 0) ? _c('div', {
+    staticClass: "image-drop-box"
+  }, [_vm._m(2)]) : _vm._e(), _vm._v(" "), _vm._l((_vm.imageGalleryChunks), function(imageGalleryChunk, imageGalleryChunkIndex) {
+    return _c('div', {
+      key: imageGalleryChunkIndex
+    }, _vm._l((imageGalleryChunk), function(image, imageIndex) {
+      return _c('img', {
+        key: imageGalleryChunkIndex + '' + imageIndex,
+        staticClass: "image-gallery-image",
+        attrs: {
+          "src": '/uploads/' + image
+        },
+        on: {
+          "click": function($event) {
+            _vm.selectImageInGallery('/uploads/' + image)
+          }
+        }
+      })
+    }))
+  })], 2) : _vm._e(), _vm._v(" "), (_vm.imageGalleryTab === 'upload') ? _c('div', [_c('droppable', {
     on: {
       "showImageGalleryTab": _vm.showImageGalleryTab
     }
@@ -36419,6 +36357,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('li', {
     staticClass: "list-group-item"
   }, [_c('h4', [_vm._v("Preview & Save")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "image-drop-box-default"
+  }, [_c('div', {
+    staticClass: "image-drop-box-default_wrapper"
+  }, [_c('div', {
+    staticClass: "glyphicon glyphicon-picture image-drop-box-default__icon"
+  }), _vm._v(" "), _c('h4', [_vm._v("Image Gallery")]), _vm._v(" "), _c('p', [_vm._v("Your image gallery is empty, upload some images by clicking on the Upload Image tab above.")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -48507,10 +48453,15 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 
 var state = {
     template: {},
-    widgets: []
+    widgets: [],
+    galleryImages: []
 };
 
-var getters = {};
+var getters = {
+    imageGalleryChunks: function imageGalleryChunks(state) {
+        return _.chunk(state.galleryImages, 4);
+    }
+};
 
 var actions = {
     loadTemplate: function loadTemplate(_ref, payload) {
@@ -48572,6 +48523,15 @@ var actions = {
         }).catch(function (error) {
             console.log(error);
         });
+    },
+    getGalleryImages: function getGalleryImages(_ref7) {
+        var commit = _ref7.commit;
+
+        axios.get('/api/images').then(function (response) {
+            commit('getGalleryImages', response.data);
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 };
 
@@ -48593,6 +48553,9 @@ var mutations = {
     },
     addWidget: function addWidget(state, payload) {
         state.widgets.splice(payload.index, 0, payload.widget.widget);
+    },
+    getGalleryImages: function getGalleryImages(state, payload) {
+        state.galleryImages = payload;
     }
 };
 
