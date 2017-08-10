@@ -1681,7 +1681,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return false;
         },
         dropEvent: function dropEvent(event) {
-            var MAXFILES = 10;
+            var MAXFILES = 12;
             var length = event.dataTransfer.files.length < MAXFILES ? event.dataTransfer.files.length : MAXFILES;
 
             this.files = [];

@@ -40,7 +40,9 @@ class ImagesController extends Controller
      */
     public function index()
     {
-        return $this->storage->disk('uploads')->files($subfolder = '');
+        $ignore = ['.DS_Store'];
+        $files  = $this->storage->disk('uploads')->files($subfolder = '');
+        return array_values(array_diff($files, $ignore));
     }
 
     /**
@@ -50,7 +52,7 @@ class ImagesController extends Controller
      */
     public function store()
     {
-        sleep(rand(0,3));
+        // sleep(rand(0,3));
 
         $file = $this->request->file('image');
         $name = $file->getClientOriginalName();

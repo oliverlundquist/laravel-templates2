@@ -57,7 +57,7 @@
                 return false;
             },
             dropEvent(event) {
-                const MAXFILES = 10
+                const MAXFILES = 12
                 const length = event.dataTransfer.files.length < MAXFILES ? event.dataTransfer.files.length : MAXFILES
 
                 this.files = []
